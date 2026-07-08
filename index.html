@@ -1,0 +1,569 @@
+<title>Roadmap Mobile App — GAL Chấm Công</title>
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --ink: #1f2823;
+    --ink-soft: #55604f;
+    --ink-faint: #8a917f;
+    --line: #e0ddd4;
+    --accent: #0e6e5c;
+    --accent-soft: #e3efe9;
+    --accent-ink: #0a5748;
+    --warn: #9a6b1f;
+    --warn-soft: #f5ecd9;
+    --info: #3d5a80;
+    --info-soft: #e4eaf2;
+    --must: #8c3b2e;
+    --must-soft: #f4e5e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171c19;
+      --surface: #1f2622;
+      --ink: #e8ebe4;
+      --ink-soft: #aab3a4;
+      --ink-faint: #737d6f;
+      --line: #333c35;
+      --accent: #4fb99f;
+      --accent-soft: #22352e;
+      --accent-ink: #7fd0bb;
+      --warn: #d5a659;
+      --warn-soft: #38301e;
+      --info: #8fadd0;
+      --info-soft: #24303e;
+      --must: #d98a77;
+      --must-soft: #3b2822;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171c19; --surface: #1f2622; --ink: #e8ebe4; --ink-soft: #aab3a4;
+    --ink-faint: #737d6f; --line: #333c35; --accent: #4fb99f; --accent-soft: #22352e;
+    --accent-ink: #7fd0bb; --warn: #d5a659; --warn-soft: #38301e;
+    --info: #8fadd0; --info-soft: #24303e; --must: #d98a77; --must-soft: #3b2822;
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f6f3; --surface: #ffffff; --ink: #1f2823; --ink-soft: #55604f;
+    --ink-faint: #8a917f; --line: #e0ddd4; --accent: #0e6e5c; --accent-soft: #e3efe9;
+    --accent-ink: #0a5748; --warn: #9a6b1f; --warn-soft: #f5ecd9;
+    --info: #3d5a80; --info-soft: #e4eaf2; --must: #8c3b2e; --must-soft: #f4e5e0;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0 1.25rem 5rem;
+  }
+  .wrap { max-width: 62rem; margin: 0 auto; }
+
+  header.hero { padding: 3.5rem 0 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
+    font-weight: 600; color: var(--accent); margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 0.75rem;
+    font-weight: 700; letter-spacing: -0.015em; text-wrap: balance;
+  }
+  .hero p.lede { max-width: 44rem; color: var(--ink-soft); font-size: 1.05rem; margin: 0; }
+  .hero-meta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 1.5rem; font-size: 0.8rem; color: var(--ink-faint); }
+  .hero-meta strong { color: var(--ink-soft); font-weight: 600; }
+  .hero-meta .audience {
+    background: var(--accent-soft); color: var(--accent-ink); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 0.35rem 0.9rem; font-size: 0.85rem; font-weight: 600;
+  }
+  .hero-meta .audience strong { color: inherit; font-weight: 700; }
+
+  section { margin-top: 3rem; }
+  h2 {
+    font-size: 1.25rem; margin: 0 0 0.35rem; letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 0.6rem;
+  }
+  .h2-sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 1.25rem; max-width: 44rem; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; }
+  .why-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.9rem 1rem;
+  }
+  .why-card h3 { margin: 0 0 0.3rem; font-size: 0.92rem; }
+  .why-card p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+
+  .phase {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    margin-top: 1.25rem; overflow: hidden;
+  }
+  .phase-head {
+    display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    padding: 1rem 1.25rem; border-bottom: 1px solid var(--line);
+  }
+  .phase-num {
+    font-variant-numeric: tabular-nums;
+    background: var(--accent); color: var(--surface); font-weight: 700;
+    width: 2rem; height: 2rem; border-radius: 4px; flex: none;
+    display: grid; place-items: center; font-size: 0.95rem;
+  }
+  .phase-head h3 { margin: 0; font-size: 1.05rem; }
+  .phase-head .goal { color: var(--ink-soft); font-size: 0.85rem; flex-basis: 100%; margin-left: 2.9rem; }
+  .phase-tag {
+    margin-left: auto; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft);
+    padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap;
+  }
+  .feat-table-scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.87rem; }
+  th {
+    text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--ink-faint); font-weight: 600; padding: 0.7rem 1rem 0.45rem;
+    border-bottom: 1px solid var(--line);
+  }
+  td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.feat-name { font-weight: 600; white-space: nowrap; }
+  td.feat-desc { color: var(--ink-soft); min-width: 16rem; }
+  td.feat-src { color: var(--ink-faint); font-size: 0.78rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .pill {
+    display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.55rem;
+    border-radius: 999px; white-space: nowrap;
+  }
+  .pill.must { background: var(--must-soft); color: var(--must); }
+  .pill.should { background: var(--info-soft); color: var(--info); }
+  .pill.native { background: var(--warn-soft); color: var(--warn); }
+  .pill.cond { background: var(--warn-soft); color: var(--warn); border: 1px dashed var(--warn); }
+
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0.75rem; }
+  .tech-card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0.9rem 1rem; }
+  .tech-card h3 { margin: 0 0 0.3rem; font-size: 0.92rem; }
+  .tech-card p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+
+  .scope-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0.75rem; }
+  .scope-box { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); padding: 1rem 1.15rem; }
+  .scope-box h3 { margin: 0 0 0.6rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .scope-box.keep h3 { color: var(--accent-ink); }
+  .scope-box.out h3 { color: var(--must); }
+  .scope-box ul { margin: 0; padding-left: 1.1rem; font-size: 0.87rem; color: var(--ink-soft); }
+  .scope-box li { margin-bottom: 0.35rem; }
+  .scope-box li:last-child { margin-bottom: 0; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .timeline { display: flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 1rem; }
+  .timeline .seg {
+    padding: 0.6rem 0.9rem; font-size: 0.78rem; font-weight: 600; color: var(--surface);
+    text-decoration: none; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .timeline .seg:hover, .timeline .seg:focus-visible { filter: brightness(1.12); text-decoration: underline; }
+  .timeline .seg:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .seg.p1 { background: var(--accent); flex: 5; }
+  .seg.p2 { background: color-mix(in srgb, var(--accent) 72%, var(--bg)); flex: 4; }
+  .seg.p3 { background: color-mix(in srgb, var(--accent) 48%, var(--bg)); flex: 4; }
+  .phase { scroll-margin-top: 1rem; }
+
+  .qnote {
+    margin-top: 2.5rem; border-left: 3px solid var(--warn); background: var(--warn-soft);
+    border-radius: 0 6px 6px 0; padding: 0.85rem 1.1rem; font-size: 0.87rem; color: var(--ink-soft);
+  }
+  .qnote strong { color: var(--ink); }
+  footer { margin-top: 3rem; font-size: 0.75rem; color: var(--ink-faint); border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">GAL Chấm Công · Đề xuất — Draft v0.1</p>
+    <h1>Roadmap ứng dụng điện thoại cho nhân viên</h1>
+    <p class="lede">Đưa các tính năng <strong>nhân viên tự dùng hằng ngày</strong> từ website hiện tại lên ứng dụng điện thoại (iPhone &amp; Android). Website vẫn giữ nguyên, là công cụ làm việc của HR, quản đốc và admin.</p>
+    <div class="hero-meta">
+      <span class="audience"><strong>Đối tượng dùng app:</strong> Nhân viên sản xuất · Nhân viên văn phòng · Tổ trưởng</span>
+      <span><strong>Ngày:</strong> 08/07/2026</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Vì sao cần app điện thoại</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Chấm công bằng camera mượt và ổn định hơn</h3>
+        <p>Mở camera nhận diện khuôn mặt trên trình duyệt điện thoại hay bị chậm, lỗi vặt tuỳ máy. App cài trực tiếp trên máy chạy nhanh và đáng tin cậy hơn hẳn.</p>
+      </div>
+      <div class="why-card">
+        <h3>Thông báo đến tay người dùng thật sự</h3>
+        <p>Thông báo qua trình duyệt trên điện thoại rất hay bị "im lặng", nhất là iPhone. App gửi thông báo như Zalo/Messenger — có phân công mới, có kết quả duyệt đơn là biết ngay.</p>
+      </div>
+      <div class="why-card">
+        <h3>Định vị chính xác hơn, đỡ tốn pin</h3>
+        <p>App đọc vị trí GPS chuẩn hơn trình duyệt — quan trọng cho việc xác nhận nhân viên chấm công đúng tại nơi làm việc.</p>
+      </div>
+      <div class="why-card">
+        <h3>Đúng thói quen của người dùng</h3>
+        <p>Nhân viên hiện trường không ngồi máy tính. Việc họ cần — chấm công, xem việc, gửi đơn, nhận thông báo — đều là việc làm trên điện thoại.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roadmap 3 giai đoạn</h2>
+    <p class="h2-sub">Nguyên tắc chọn tính năng: app chỉ chứa những gì nhân viên <em>tự thao tác trên dữ liệu của chính mình</em>. Toàn bộ nghiệp vụ quản lý — điều hành (danh mục, phân quyền, báo cáo tổng hợp, kho) vẫn ở website.</p>
+
+    <nav class="timeline" aria-label="Chuyển nhanh tới giai đoạn">
+      <a class="seg p1" href="#phase-1">Giai đoạn 1 — Tính năng phục vụ Nhân viên sản xuất</a>
+      <a class="seg p2" href="#phase-2">Giai đoạn 2 — Tính năng phục vụ Nhân viên văn phòng</a>
+      <a class="seg p3" href="#phase-3">Giai đoạn 3 — Tính năng phục vụ Tổ trưởng (ưu tiên thấp)</a>
+    </nav>
+
+    <div class="phase" id="phase-1">
+      <div class="phase-head">
+        <span class="phase-num">1</span>
+        <h3>Tính năng phục vụ Nhân viên sản xuất</h3>
+        <span class="phase-tag">Bắt buộc</span>
+        <p class="goal">Mục tiêu: nhân viên sản xuất bỏ hẳn việc mở trình duyệt để chấm công. Đây là lý do tồn tại của app. (Đăng nhập, lịch sử, thông báo là nền dùng chung cho mọi giai đoạn sau.)</p>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Tính năng</th><th>Người dùng làm được gì</th><th>Mức độ</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Đăng nhập</td>
+            <td class="feat-desc">Đăng nhập bằng tài khoản công ty cấp (như trên web), đổi mật khẩu, giữ đăng nhập an toàn trên máy. Nhân viên mới sẽ được nhắc khai báo hồ sơ lần đầu.</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Chấm công sản xuất (camera + khuôn mặt)</td>
+            <td class="feat-desc">Vào ca / ra ca cho công việc sản xuất: mở camera, hệ thống nhận diện khuôn mặt, chọn ca làm việc. Lần đầu dùng sẽ có bước đăng ký khuôn mặt.</td>
+            <td><span class="pill must">Bắt buộc</span> <span class="pill native">App vượt trội web</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Lịch sử chấm công của tôi</td>
+            <td class="feat-desc">Xem lại các lần vào/ra ca, giờ công, giờ tăng ca theo ngày — chỉ thấy dữ liệu của chính mình. (Bảng công tổng hợp cả tháng sẽ có ở Giai đoạn 2.)</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Thông báo đẩy</td>
+            <td class="feat-desc">Nhận thông báo trên điện thoại: có phân công mới, nhắc chấm công, kết quả duyệt đơn — kể cả khi không mở app.</td>
+            <td><span class="pill must">Bắt buộc</span> <span class="pill native">App vượt trội web</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Đăng ký tài khoản trong app</td>
+            <td class="feat-desc">Người dùng tự đăng ký tài khoản, kèm bước công ty phê duyệt / gắn vào doanh nghiệp (hoặc chế độ demo cho người ngoài xem). Chỉ làm nếu chọn phương án phát hành công khai trên App Store.</td>
+            <td><span class="pill cond">Nếu phát hành công khai</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tự xoá tài khoản trong app</td>
+            <td class="feat-desc">Người dùng tự xoá tài khoản và dữ liệu cá nhân (kể cả dữ liệu khuôn mặt) ngay trong app; dữ liệu công / lương vẫn lưu theo nghĩa vụ của công ty. Chỉ làm nếu chọn phương án phát hành công khai.</td>
+            <td><span class="pill cond">Nếu phát hành công khai</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Trang chính sách riêng tư &amp; hỗ trợ</td>
+            <td class="feat-desc">Trang web công khai gồm chính sách riêng tư, điều khoản sử dụng, kênh hỗ trợ — Apple và Google kiểm tra đường link này khi duyệt. Chỉ làm nếu chọn phương án phát hành công khai.</td>
+            <td><span class="pill cond">Nếu phát hành công khai</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="phase" id="phase-2">
+      <div class="phase-head">
+        <span class="phase-num">2</span>
+        <h3>Tính năng phục vụ Nhân viên văn phòng</h3>
+        <span class="phase-tag">Bắt buộc</span>
+        <p class="goal">Mục tiêu: chấm công văn phòng lên app, và mọi việc thường nhật của nhân viên (cả sản xuất lẫn văn phòng) đều tự làm được trên app, không cần nhờ HR hay tổ trưởng làm hộ.</p>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Tính năng</th><th>Người dùng làm được gì</th><th>Mức độ</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Chấm công văn phòng</td>
+            <td class="feat-desc">Check-in / check-out hằng ngày theo ca; hệ thống xác nhận đang đứng trong phạm vi nơi làm việc bằng GPS.</td>
+            <td><span class="pill must">Bắt buộc</span> <span class="pill native">App vượt trội web</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Bảng công tháng của tôi</td>
+            <td class="feat-desc">Theo dõi công cá nhân cả tháng như các app nhân sự phổ biến: lịch tháng đánh dấu ngày đủ công / thiếu / nghỉ / có tăng ca; tổng số công, giờ tăng ca, số lần đi trễ, số lần quên chấm công; bấm vào ngày để xem chi tiết. <em>Lưu ý: website hiện chưa có màn hình này — đây là tính năng làm mới riêng cho app, cần thêm phần tổng hợp dữ liệu phía hệ thống.</em></td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Công việc của tôi</td>
+            <td class="feat-desc">Xem danh sách công việc mình được phân công theo ngày, kèm trạng thái đã chấm công hay chưa.</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Xác nhận phân công</td>
+            <td class="feat-desc">Nhận thông báo được phân việc → bấm xác nhận hoặc từ chối ngay trên app.</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Đơn quên chấm công</td>
+            <td class="feat-desc">Quên chấm công? Tạo đơn ngay trên app, chụp ảnh minh chứng đính kèm, theo dõi đơn được duyệt qua 2 cấp. Người duyệt cũng duyệt được trên app.</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Hộp thông báo</td>
+            <td class="feat-desc">Xem lại mọi thông báo đã nhận, đánh dấu đã đọc, bấm vào là mở đúng màn hình liên quan.</td>
+            <td><span class="pill must">Bắt buộc</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Hồ sơ cá nhân</td>
+            <td class="feat-desc">Xem và cập nhật thông tin cá nhân, ảnh đại diện; khai báo hồ sơ đầy đủ cho nhân viên mới.</td>
+            <td><span class="pill should">Nên có</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="phase" id="phase-3">
+      <div class="phase-head">
+        <span class="phase-num">3</span>
+        <h3>Tính năng phục vụ Tổ trưởng &amp; hiện trường</h3>
+        <span class="phase-tag" style="background: var(--warn-soft); color: var(--warn);">Ưu tiên thấp</span>
+        <p class="goal">Đưa các việc hiện trường cần chụp ảnh của tổ trưởng, kiểm tra chất lượng lên app. Ưu tiên thấp — chỉ xem xét sau khi Giai đoạn 1–2 chạy ổn định, không cam kết trong phạm vi ban đầu.</p>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Tính năng</th><th>Người dùng làm được gì</th><th>Mức độ</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Checklist công việc + chụp ảnh</td>
+            <td class="feat-desc">Tổ trưởng chụp ảnh xác nhận từng hạng mục công việc, ảnh phạm vi làm việc ngay tại hiện trường.</td>
+            <td><span class="pill should">Nên có</span> <span class="pill native">App vượt trội web</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Kiểm tra nội bộ — chấm điểm &amp; chụp ảnh</td>
+            <td class="feat-desc">Người kiểm tra chất lượng chấm điểm từng hạng mục và chụp ảnh bằng chứng trực tiếp trên app.</td>
+            <td><span class="pill should">Nên có</span> <span class="pill native">App vượt trội web</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Mượn / trả dụng cụ</td>
+            <td class="feat-desc">Nhân viên xem mình đang mượn dụng cụ gì, nhận nhắc khi quá hạn, xác nhận mượn/trả.</td>
+            <td><span class="pill should">Nên có</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Duyệt nhanh cho quản lý</td>
+            <td class="feat-desc">Quản đốc / tổ trưởng duyệt đơn từ và các yêu cầu phát sinh ngay từ thông báo, không cần mở máy tính.</td>
+            <td><span class="pill should">Nên có</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quy định của Apple — phải tính từ đầu</h2>
+    <p class="h2-sub">Muốn đưa app lên iPhone phải qua vòng kiểm duyệt của Apple. Tin tốt: app nội bộ cho nhân viên, tài khoản do công ty cấp — được miễn vài yêu cầu nặng. Nhưng phải chọn đúng cách phát hành và chuẩn bị đúng hồ sơ.</p>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">A</span>
+        <h3>Cách phát hành app — quyết định đầu tiên</h3>
+        <span class="phase-tag">Chốt trước khi bắt đầu</span>
+        <p class="goal">Có 3 phương án, đều phải qua Apple kiểm duyệt. Hai phương án đầu dành cho app nội bộ; phương án 3 là đưa app lên kho ứng dụng công khai — làm được nhưng phải xây thêm tính năng để đáp ứng quy định.</p>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Phương án</th><th>Cách hoạt động</th><th>Phù hợp khi</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">App "ẩn" trên App Store</td>
+            <td class="feat-desc">App vẫn nằm trên App Store nhưng không ai tìm thấy được — chỉ người có đường link riêng (do công ty gửi) mới cài được. Không cần cài đặt gì thêm trên máy nhân viên. Apple chính thức nêu "app cho nhân viên" là trường hợp phù hợp.</td>
+            <td class="feat-desc">Nhân viên dùng điện thoại cá nhân — khả năng cao là trường hợp của GAL</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Phát hành riêng cho doanh nghiệp</td>
+            <td class="feat-desc">Công ty đăng ký chương trình quản lý thiết bị của Apple, app được "đẩy" thẳng xuống các máy do công ty quản lý.</td>
+            <td class="feat-desc">Công ty cấp điện thoại cho nhân viên, hoặc đã có hệ thống quản lý thiết bị</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Phát hành công khai trên App Store</td>
+            <td class="feat-desc">App lên App Store bình thường, ai cũng tìm thấy và tải được. Đổi lại phải xây thêm các tính năng theo quy định cho app công khai (danh sách bên dưới) và mất thêm thời gian phát triển + kiểm duyệt gắt hơn.</td>
+            <td class="feat-desc">Muốn thương hiệu xuất hiện công khai, hoặc định mở rộng cho khách hàng / đơn vị khác dùng sau này</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">A+</span>
+        <h3>Nếu chọn phát hành công khai — phải làm thêm gì</h3>
+        <span class="phase-tag" style="background: var(--warn-soft); color: var(--warn);">Việc phát sinh</span>
+        <p class="goal">App công khai không còn được hưởng các miễn trừ của app nội bộ. Các tính năng phải xây thêm:</p>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Việc phải làm thêm</th><th>Vì sao</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Đăng ký tài khoản trong app</td>
+            <td class="feat-desc">App công khai mà tải về không đăng nhập được gì sẽ bị Apple từ chối vì "vô dụng với người tải". Cần luồng tự đăng ký (kèm bước công ty phê duyệt/gắn nhân viên vào doanh nghiệp) hoặc chế độ dùng thử/demo cho người ngoài xem.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tự xoá tài khoản trong app</td>
+            <td class="feat-desc">Đã cho đăng ký thì bắt buộc phải cho người dùng tự xoá tài khoản và dữ liệu ngay trong app — kèm quy trình phía hệ thống: xoá dữ liệu cá nhân, dữ liệu khuôn mặt, nhưng vẫn giữ dữ liệu công/lương theo nghĩa vụ lưu trữ của công ty (cần tư vấn quy định lao động).</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Trang chính sách riêng tư &amp; hỗ trợ công khai</td>
+            <td class="feat-desc">Cần trang web công khai: chính sách riêng tư, điều khoản sử dụng, kênh hỗ trợ — Apple và Google đều kiểm tra đường link này.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Đăng nhập bằng Apple (có thể phát sinh)</td>
+            <td class="feat-desc">Chỉ bắt buộc nếu app thêm đăng nhập Google/Facebook. Giữ đăng nhập bằng tài khoản riêng thì vẫn tránh được.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Chuẩn mực giao diện cao hơn</td>
+            <td class="feat-desc">App công khai đại diện thương hiệu và bị kiểm duyệt kỹ hơn về trải nghiệm, màn hình giới thiệu, xử lý lỗi — cần đầu tư thêm phần hoàn thiện.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">B</span>
+        <h3>Các quy định phải tuân thủ</h3>
+        <span class="phase-tag">Làm trong Giai đoạn 1</span>
+      </div>
+      <div class="feat-table-scroll">
+      <table>
+        <thead><tr><th>Chủ đề</th><th>Apple yêu cầu gì</th><th>Với app GAL nghĩa là gì</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Cho phép tự xoá tài khoản</td>
+            <td class="feat-desc">App nào cho người dùng tự đăng ký tài khoản thì phải cho họ tự xoá tài khoản trong app.</td>
+            <td class="feat-desc"><strong>Về nguyên tắc không bị áp dụng</strong> — app không có nút đăng ký, tài khoản do HR cấp. Tuy nhiên người duyệt của Apple hay hỏi lại: cần giải trình rõ khi nộp app + có màn hình hướng dẫn "liên hệ HR để yêu cầu xoá dữ liệu cá nhân". Nội bộ cũng cần thống nhất quy trình xoá dữ liệu cá nhân khi nhân viên nghỉ việc.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Dữ liệu khuôn mặt</td>
+            <td class="feat-desc">Thu thập dữ liệu khuôn mặt phải xin phép rõ ràng, nêu rõ dùng làm gì, và tuyệt đối không dùng vào mục đích khác (quảng cáo, phân tích...).</td>
+            <td class="feat-desc"><strong>Điểm rủi ro lớn nhất khi kiểm duyệt.</strong> Cần: màn hình xin đồng ý trước khi đăng ký khuôn mặt, chính sách riêng tư ghi rõ "chỉ dùng để chấm công", và quy trình xoá dữ liệu khuôn mặt khi nhân viên nghỉ việc.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Vị trí GPS</td>
+            <td class="feat-desc">Phải giải thích lý do xin vị trí; chỉ xin khi cần; không được theo dõi vị trí liên tục nếu không có lý do chính đáng.</td>
+            <td class="feat-desc">App chỉ đọc vị trí <em>tại thời điểm chấm công</em> — tuyệt đối không theo dõi vị trí cả ngày. Xin quyền theo dõi liên tục rất dễ bị Apple từ chối vì bị coi là "giám sát nhân viên".</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Camera / ảnh</td>
+            <td class="feat-desc">Phải nêu rõ lý do dùng camera; khi ghi hình phải có dấu hiệu cho người dùng biết.</td>
+            <td class="feat-desc">Áp dụng cho chấm công bằng camera và các tính năng chụp ảnh minh chứng.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Khai báo quyền riêng tư</td>
+            <td class="feat-desc">Trước khi phát hành phải khai với Apple: app thu thập những dữ liệu gì (vị trí, ảnh, khuôn mặt...) và dùng làm gì. Thông tin này hiện công khai trên trang tải app.</td>
+            <td class="feat-desc">Lập danh sách đầy đủ các loại dữ liệu app thu thập — làm một lần ở Giai đoạn 1, cập nhật mỗi khi thêm tính năng mới.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Thông báo đẩy</td>
+            <td class="feat-desc">Không được ép người dùng bật thông báo mới cho dùng app.</td>
+            <td class="feat-desc">Ai tắt thông báo vẫn phải dùng được mọi tính năng — vào app vẫn thấy phân công, kết quả duyệt đơn.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tài khoản cho người kiểm duyệt</td>
+            <td class="feat-desc">App có đăng nhập phải kèm một tài khoản thử để nhân viên Apple vào kiểm tra được mọi tính năng.</td>
+            <td class="feat-desc">Chuẩn bị tài khoản thử + môi trường thử nghiệm truy cập được từ nước ngoài, kèm hướng dẫn thử chấm công (vì người kiểm duyệt không đứng ở nơi làm việc của GAL).</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <p class="h2-sub" style="margin-top:0.9rem">Phía Android (Google) cũng có bộ quy định tương đương — sẽ lập danh sách riêng khi chốt cách phát hành cho Android. Riêng hình thức app "ẩn" (unlisted) là quy định riêng của Apple — <mark style="background: var(--warn-soft); color: var(--ink); font-weight: 600; padding: 0.05rem 0.3rem; border-radius: 3px;">Google không có khái niệm này</mark> nên phía Android không cần lo mục A; app nội bộ Android phát hành qua kênh riêng cho doanh nghiệp.</p>
+  </section>
+
+  <section>
+    <h2>Chi phí duy trì app hằng năm</h2>
+    <p class="h2-sub">Chi phí trả cho Apple / Google để app tồn tại trên kho ứng dụng — chưa gồm chi phí phát triển và vận hành hệ thống. Khuyến nghị đăng ký dưới <strong>tên doanh nghiệp</strong>, không dùng tài khoản cá nhân.</p>
+    <div class="feat-table-scroll" style="background: var(--surface); border: 1px solid var(--line); border-radius: 8px;">
+      <table>
+        <thead><tr><th>Khoản mục</th><th>Chi phí</th><th>Ghi chú</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Tài khoản Apple Developer<br><span style="font-size:0.78rem; color:var(--ink-faint); font-weight:400">cho iPhone</span></td>
+            <td class="feat-desc" style="white-space:nowrap">99 USD/năm<br><span style="font-size:0.78rem; color:var(--ink-faint)">(~2,6 triệu đ)</span></td>
+            <td class="feat-desc">Bắt buộc cho mọi phương án phát hành iPhone. Phải gia hạn hằng năm — quên gia hạn là app bị gỡ. Đăng ký dạng doanh nghiệp cần mã định danh D-U-N-S (cấp miễn phí, chờ ~1–2 tuần), tên hiển thị là tên công ty. Nếu chọn phương án "phát hành riêng cho doanh nghiệp" thì đăng ký thêm Apple Business Manager — miễn phí, không phát sinh chi phí.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tài khoản Google Play<br><span style="font-size:0.78rem; color:var(--ink-faint); font-weight:400">cho Android</span></td>
+            <td class="feat-desc" style="white-space:nowrap">25 USD một lần<br><span style="font-size:0.78rem; color:var(--ink-faint)">(~650 nghìn đ)</span></td>
+            <td class="feat-desc">Trả một lần duy nhất, không phải trả hằng năm. Tài khoản doanh nghiệp cần giấy tờ xác minh công ty + mã D-U-N-S.</td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tổng cộng</td>
+            <td class="feat-desc" style="white-space:nowrap"><strong>~99 USD/năm</strong><br><span style="font-size:0.78rem; color:var(--ink-faint)">+ 25 USD năm đầu</span></td>
+            <td class="feat-desc">Khoản cố định, không phụ thuộc số lượng nhân viên dùng app.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="h2-sub" style="margin-top:0.9rem">Ngoài ra cần dự trù chi phí vận hành định kỳ không thuộc Apple/Google: cập nhật app theo phiên bản iOS/Android mới mỗi năm, và hạ tầng máy chủ hiện có gánh thêm lượng truy cập từ app.</p>
+  </section>
+
+  <section>
+    <h2>Việc kỹ thuật cần chuẩn bị</h2>
+    <p class="h2-sub">Phần dành cho đội kỹ thuật, tóm tắt để mọi người nắm được vì sao cần thời gian chuẩn bị nền móng trước khi thấy tính năng đầu tiên.</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h3>Cổng kết nối cho app</h3>
+        <p>Website và app "nói chuyện" với hệ thống theo hai cách khác nhau — cần xây thêm một lớp cổng kết nối cho app. Điểm tốt: phần lõi nghiệp vụ được tái sử dụng nguyên vẹn, không phải viết lại. Đây là hạng mục quyết định khối lượng của Giai đoạn 1.</p>
+      </div>
+      <div class="tech-card">
+        <h3>Đăng nhập an toàn trên điện thoại</h3>
+        <p>Cơ chế tài khoản hiện tại dùng lại được; cần bổ sung cách lưu phiên đăng nhập an toàn trên máy để không phải đăng nhập lại liên tục.</p>
+      </div>
+      <div class="tech-card">
+        <h3>Kênh thông báo mới</h3>
+        <p>Hệ thống gửi thông báo đã được thiết kế sẵn để "cắm thêm" kênh mới — thêm kênh thông báo cho điện thoại không phải đập đi làm lại.</p>
+      </div>
+      <div class="tech-card">
+        <h3>Nhận diện khuôn mặt</h3>
+        <p>Cần chọn một trong hai hướng: nhận diện ngay trên điện thoại (nhanh, chạy được khi mạng yếu) hoặc gửi ảnh về máy chủ xử lý như web hiện tại (đơn giản hơn để làm).</p>
+      </div>
+      <div class="tech-card">
+        <h3>Phân quyền giữ nguyên</h3>
+        <p>Ai thấy nút gì, xem được dữ liệu gì — dùng đúng bộ phân quyền của website hiện tại, không tạo hệ phân quyền riêng cho app.</p>
+      </div>
+      <div class="tech-card">
+        <h3>Chấm công khi mất mạng</h3>
+        <p>Ở xưởng / cầu tàu sóng có thể yếu: app cần ghi nhận lần chấm công tạm trên máy rồi tự gửi lên khi có mạng lại. Cần quyết sớm vì ảnh hưởng cách xây tính năng chấm công.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Phân vai Website ↔ App</h2>
+    <div class="scope-cols">
+      <div class="scope-box keep">
+        <h3>Ở lại Website (quản trị)</h3>
+        <ul>
+          <li>Quản lý danh mục: nhân viên, phân quyền, khu vực – đơn vị, dịch vụ, sản phẩm, ca làm việc</li>
+          <li>Kế hoạch sản xuất: tạo lệnh, phân công, điều chuyển, sắp xếp nhân sự</li>
+          <li>Kho dụng cụ: nhập / xuất / kiểm kê</li>
+          <li>Báo cáo tổng hợp, xuất Excel, nhật ký hệ thống</li>
+          <li>Cấu hình hệ thống, gửi thông báo hàng loạt</li>
+        </ul>
+      </div>
+      <div class="scope-box out">
+        <h3>Không làm (cả hai nơi)</h3>
+        <ul>
+          <li>Tính lương trên app — lương thuộc phạm vi website (bộ phận Tài chính)</li>
+          <li>Bê nguyên 100% website lên app — app là công cụ của nhân viên, không phải bản thu nhỏ của website</li>
+          <li>Dùng app hoàn toàn không cần mạng — chỉ riêng chấm công có cơ chế lưu tạm khi mất sóng</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="qnote">
+    <strong>Cần chốt trong meeting:</strong> ① Cách phát hành trên iPhone — app "ẩn" (nhân viên dùng máy cá nhân), phát hành riêng cho doanh nghiệp (máy công ty cấp), hay công khai trên App Store (chấp nhận xây thêm đăng ký / xoá tài khoản...); ② Hướng xây cổng kết nối cho app — quyết định lớn nhất về khối lượng công việc; ③ Nhận diện khuôn mặt trên điện thoại hay trên máy chủ + quy trình xin đồng ý và xoá dữ liệu khuôn mặt; ④ Giai đoạn 3 (kiểm tra nội bộ, mượn trả dụng cụ) có đúng nhu cầu tổ trưởng không.
+  </div>
+
+  <footer>
+    Draft nội bộ để thảo luận · Tổng hợp từ tài liệu yêu cầu của hệ thống (.specs) · Chi tiết mã tính năng tham chiếu (F-xxx) có trong bản kỹ thuật.
+  </footer>
+</div>
