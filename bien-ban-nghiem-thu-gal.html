@@ -229,6 +229,7 @@
   </div>
 
   <div class="title">
+    <!-- ví dụ:  BIÊN BẢN NGHIỆM THU CÔNG VIỆC RỬA ƯỚT TÀU BAY-->
     <h1>{{title}}</h1>
     <h2>ĐỊA ĐIỂM: {{địa điểm}}</h2>
   </div>
@@ -254,7 +255,11 @@
       </div>
       <div>
         Số
-        phiếu:...................................................................
+        phiếu:...............................Ca:...................................
+      </div>
+      <div>
+        Vị trí thực
+        hiện:.............................................................
       </div>
     </div>
   </div>
@@ -263,28 +268,34 @@
     <colgroup>
       <col class="c-stt" />
       <col />
+      <col />
+      <col />
+      <col class="c-dvt" />
+      <col class="c-dvt" />
       <col class="c-so" />
-      <col class="c-dat" />
-      <col class="c-kdat" />
+      <col class="c-tg" />
       <col class="c-gc" />
     </colgroup>
     <thead>
       <tr>
-        <th rowspan="2">STT</th>
-        <th rowspan="2">Tên gói dịch vụ vệ sinh</th>
-        <th rowspan="2">Lần thực hiện</th>
-        <th colspan="2">Nghiệm thu</th>
-        <th rowspan="2">Ghi chú</th>
-      </tr>
-      <tr>
-        <th>Đạt</th>
-        <th>Không đạt</th>
+        <th>STT</th>
+        <th>Nhân sự GAL</th>
+        <th>Kế hoạch công việc</th>
+        <th>Vị trí làm việc</th>
+        <th>Giờ làm</th>
+        <th>Giờ nghỉ</th>
+        <th>Tổng số giờ làm</th>
+        <th>Ký tên</th>
+        <th>Ghi chú</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td class="c">1</td>
-        <td>Gói vệ sinh ECP Buồng vệ sinh</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -292,7 +303,10 @@
       </tr>
       <tr>
         <td class="c">2</td>
-        <td>Gói vệ sinh chi tiết Da</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -300,7 +314,10 @@
       </tr>
       <tr>
         <td class="c">3</td>
-        <td>Gói vệ sinh Buồng lái - EC Check</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -308,7 +325,10 @@
       </tr>
       <tr>
         <td class="c">4</td>
-        <td>Gói vệ sinh Buồng lái - C Check</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -316,7 +336,10 @@
       </tr>
       <tr>
         <td class="c">5</td>
-        <td>Gói vệ sinh Ghế khách (hàng ghế 1-18) - EA Check</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -324,95 +347,10 @@
       </tr>
       <tr>
         <td class="c">6</td>
-        <td>Gói vệ sinh Ghế khách (hàng ghế 19 trở đi) - EA Check</td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-      </tr>
-      <tr>
-        <td class="c">7</td>
-        <td>Gói vệ sinh Ghế khách - C Y Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">8</td>
-        <td>Gói vệ sinh Ghế tiếp viên - CY Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">9</td>
-        <td>Gói vệ sinh Bếp - EA Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">10</td>
-        <td>Gói vệ sinh Bếp - C Y Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">11</td>
-        <td>Gói vệ sinh Buồng vệ sinh - EA Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">12</td>
-        <td>Gói vệ sinh Buồng vệ sinh - C Y Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">13</td>
-        <td>Gói vệ sinh Thảm vải - EA Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">14</td>
-        <td>Gói vệ sinh NTF - EC Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">15</td>
-        <td>Gói vệ sinh Trần, Vách, Hộc hành lý - A Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">16</td>
-        <td>Gói vệ sinh Đèn, Cửa sổ - EC Check</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c">17</td>
-        <td>Gói vệ sinh Đèn - C Check</td>
         <td></td>
         <td></td>
         <td></td>
@@ -457,8 +395,8 @@
         Không được tẩy xoá;
       </li>
       <li>
-        Phiếu cung cấp dịch vụ được lập thành 02 bản có nội dung như nhau, mỗi
-        bên giữ một bản;
+        Phiếu cung cấp dịch vụ được lập thành 02 (hai) bản có nội dung như nhau,
+        mỗi bên giữ 01 (một) bản;
       </li>
       <li>
         Nếu công việc kéo dài qua nhiều ngày thì thông tin về giờ bắt đầu theo
