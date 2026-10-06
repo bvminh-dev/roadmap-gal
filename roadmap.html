@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap Mobile App — GAL Chấm Công</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+:root{
+ --primary:#0e6e5c;--background:#f4f4f6;--surface:#fff;--foreground:#2c2c2c;--muted:#707070;--border:#eeeff1;--border-strong:#e2e3e6;--hover:#f8f8fa;
+ --s-done:#007a55;--s-done-bg:#ecfdf5;--s-wait:#bb4d00;--s-wait-bg:#fffbeb;--s-ask:#6d44a8;--s-ask-bg:#f4effb;--s-hold:#52525c;--s-hold-bg:#f4f4f5;
+ --p1:#0e6e5c;--p2:#1f7a8c;--p3:#6b7280;--on-p:#fff;
+ --bar-done:#12a06f;--bar-wait:#e07b1a;--bar-ask:#8b5cf6;--bar-hold:#a3a3ab;
+ --primary-light:color-mix(in srgb,var(--primary) 9%,transparent);--ring-focus:color-mix(in srgb,var(--primary) 12%,transparent);--border-focus:var(--primary);
+ --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;--r:12px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--primary:#5fc4b6;--background:#0b1110;--surface:#121b19;--foreground:#e3ece9;--muted:#93a39f;--border:#1b2825;--border-strong:#243531;--hover:#16211f;
+ --s-done:#52c488;--s-done-bg:#52c48826;--s-wait:#e0a640;--s-wait-bg:#e0a64026;--s-ask:#b998e6;--s-ask-bg:#b998e626;--s-hold:#97a3a0;--s-hold-bg:#97a3a022;
+ --p1:#5fc4b6;--p2:#5db7cc;--p3:#9aa3ad;--on-p:#0b1110;
+ --bar-done:#52c488;--bar-wait:#e0a640;--bar-ask:#b998e6;--bar-hold:#7c8885;}}
+:root[data-theme="dark"]{color-scheme:dark;--primary:#5fc4b6;--background:#0b1110;--surface:#121b19;--foreground:#e3ece9;--muted:#93a39f;--border:#1b2825;--border-strong:#243531;--hover:#16211f;
+ --s-done:#52c488;--s-done-bg:#52c48826;--s-wait:#e0a640;--s-wait-bg:#e0a64026;--s-ask:#b998e6;--s-ask-bg:#b998e626;--s-hold:#97a3a0;--s-hold-bg:#97a3a022;
+ --p1:#5fc4b6;--p2:#5db7cc;--p3:#9aa3ad;--on-p:#0b1110;
+ --bar-done:#52c488;--bar-wait:#e0a640;--bar-ask:#b998e6;--bar-hold:#7c8885;}
+*{box-sizing:border-box}
+* { --scrollbar-thumb:transparent } *:hover{ --scrollbar-thumb:color-mix(in srgb,var(--foreground) 16%,transparent) }
+::-webkit-scrollbar{width:4px;height:4px} ::-webkit-scrollbar-track{background:transparent} ::-webkit-scrollbar-thumb{background:var(--scrollbar-thumb);border-radius:9999px}
+@supports not selector(::-webkit-scrollbar){* { scrollbar-width:thin;scrollbar-color:transparent transparent } *:hover{ scrollbar-color:color-mix(in srgb,var(--foreground) 18%,transparent) transparent }}
+html{scroll-behavior:smooth} @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--background);color:var(--foreground);font:14px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul{margin:0;padding:0} ul{list-style:none} a{color:inherit;text-decoration:none}
+svg{width:16px;height:16px;flex-shrink:0}
+.muted{color:var(--muted)} .sm{font-size:12.5px} .nw{white-space:nowrap} .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.page{max-width:1120px;margin:0 auto;padding:24px 16px 64px;display:grid;gap:16px} .page>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+h2{font-size:16px;font-weight:700;line-height:1.3} h3{font-size:14px;font-weight:600}
+.hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hd img{height:28px;width:auto;border-radius:6px;background:#fff;padding:2px}
+.hd h1{font-size:20px;line-height:1.25;font-weight:700;letter-spacing:-.01em} .hd .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tb{width:38px;height:38px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);color:var(--foreground);display:grid;place-items:center;cursor:pointer;padding:0} .tb:hover{background:color-mix(in srgb,var(--foreground) 9%,var(--surface))}
+.tb span{display:grid} :root[data-theme=dark] .th-moon,:root:not([data-theme=dark]) .th-sun{display:none}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:color-mix(in srgb,var(--foreground) 9%,transparent)}
+.seg a,.seg label{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:8px;color:color-mix(in srgb,var(--foreground) 75%,var(--surface));font-weight:500;white-space:nowrap;cursor:pointer}
+.seg a:hover,.seg label:hover{color:var(--foreground)}
+.seg [aria-current]{background:var(--surface);color:var(--foreground);font-weight:600;box-shadow:0 0 0 1px rgb(0 0 0/.05),0 1px 2px rgb(0 0 0/.06)}
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border-strong);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;color:var(--fg);background:var(--bg)}
+.c-done,.t-done{--fg:var(--s-done);--bg:var(--s-done-bg)} .c-wait,.t-wait{--fg:var(--s-wait);--bg:var(--s-wait-bg)} .c-ask,.t-ask{--fg:var(--s-ask);--bg:var(--s-ask-bg)} .c-hold,.t-hold{--fg:var(--s-hold);--bg:var(--s-hold-bg)}
+.c-p1{--fg:var(--on-p);--bg:var(--p1)} .c-p2{--fg:var(--on-p);--bg:var(--p2)} .c-p3{--fg:var(--on-p);--bg:var(--p3)} .c-pri{--fg:var(--primary);--bg:var(--primary-light)}
+.ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--bg,var(--primary-light));color:var(--fg,var(--primary));flex-shrink:0} .ic svg{width:18px;height:18px}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;background:var(--border-strong)} .bar i{display:block;min-width:3px} .bar.lg{height:12px;border-radius:6px}
+.b-done{background:var(--bar-done)} .b-wait{background:var(--bar-wait)} .b-ask{background:var(--bar-ask)} .b-hold{background:var(--bar-hold)}
+.big{font-size:28px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.circ{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--fg);font-weight:700;font-size:13px;flex-shrink:0}
+.sh{display:flex;align-items:center;gap:12px;padding:14px 20px;flex-wrap:wrap} .sh .r{margin-left:auto}
+.car{color:var(--muted);transition:rotate .15s}
+:focus-visible,summary:focus-visible{outline:2px solid var(--border-focus);outline-offset:2px}
+
+.pad{padding:16px 20px;display:grid;gap:8px;align-content:start}
+.top2{display:flex;gap:10px;align-items:center}
+.why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.why>div{padding:14px;display:grid;gap:8px;align-content:start}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+.ph{border-top:3px solid var(--pc);padding:16px;display:grid;gap:10px;align-content:start;scroll-margin-top:16px}
+.ph .top{display:flex;align-items:center;gap:10px} .ph .circ{background:var(--pc);color:var(--on-p)}
+.ph li{display:flex;gap:8px;align-items:flex-start;font-size:13px} .ph li svg{width:14px;height:14px;margin-top:3px;color:var(--pc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.ch{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:var(--hover);border:1px solid var(--border);font-size:12.5px;white-space:nowrap}
+.ch.warn{background:var(--s-wait-bg);border-color:transparent;color:var(--s-wait);font-weight:600}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.opt1{padding:16px;display:grid;gap:8px;align-content:start} .opt1 .top{display:flex;align-items:center;gap:10px}
+.opt1.hl{border-color:color-mix(in srgb,var(--primary) 40%,var(--border))}
+.costs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cost1{padding:16px;display:grid;gap:4px} .cost1 .top{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stackx{display:grid;gap:12px}
+.sech{display:flex;align-items:center;gap:10px;padding:0 4px;margin-bottom:-4px}
+/* chi tiết gập: giữ nguyên nội dung bản cũ, chỉ đổi dáng theo token */
+details.more>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;color:var(--muted);font-weight:500;font-size:13px;padding:6px 0}
+details.more>summary::-webkit-details-marker{display:none} details.more>summary:hover{color:var(--foreground)} details.more[open]>summary svg{rotate:180deg}
+details.more>summary svg{transition:rotate .15s}
+details.more{border-top:1px solid var(--border);padding-top:4px}
+.why-grid,.tech-grid,.scope-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:12px;margin-top:8px}
+.why-card,.tech-card,.scope-box{background:var(--hover);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.why-card h3,.tech-card h3{margin-bottom:4px;font-size:13.5px} .why-card p,.tech-card p{font-size:13px;color:var(--muted)}
+.scope-box h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px} .scope-box.keep h3{color:var(--primary)} .scope-box.out h3{color:var(--s-ask)}
+.scope-box ul{padding-left:18px;list-style:disc;font-size:13px;color:var(--muted)} .scope-box li{margin-bottom:4px}
+.h2-sub{color:var(--muted);font-size:13px;margin:8px 0 12px;max-width:62ch}
+.phase{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-top:12px;overflow:hidden}
+.phase-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)}
+.phase-num{background:var(--primary);color:var(--surface);font-weight:700;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:none}
+.phase-head h3{font-size:14px} .phase-head .goal{color:var(--muted);font-size:13px;flex-basis:100%}
+.phase-tag{margin-left:auto;font-size:12px;font-weight:600;color:var(--s-ask);background:var(--s-ask-bg);padding:2px 9px;border-radius:999px}
+.feat-table-scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;padding:10px 16px 6px;border-bottom:1px solid var(--border)}
+td{padding:10px 16px;border-bottom:1px solid var(--border);vertical-align:top} tr:last-child td{border-bottom:none}
+td.feat-name{font-weight:600;white-space:nowrap} td.feat-desc{color:var(--muted);min-width:16rem} td.feat-src{color:var(--muted);font-size:12px;white-space:nowrap}
+.pill.must,.pill.should,.pill.native,.pill.cond{display:inline-block;height:auto;padding:2px 9px;font-size:12px;font-weight:600;border:0}
+.pill.must{background:var(--s-done-bg);color:var(--s-done)} .pill.should{background:var(--s-hold-bg);color:var(--s-hold)} .pill.native{background:var(--s-wait-bg);color:var(--s-wait)} .pill.cond{background:var(--s-wait-bg);color:var(--s-wait);border:1px dashed var(--s-wait)}
+.qnote{border-left:3px solid var(--s-wait);background:var(--s-wait-bg);border-radius:0 var(--r) var(--r) 0;padding:12px 16px;font-size:13px}
+footer{font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;display:grid;gap:4px} footer a{color:var(--primary);display:inline-block;padding:4px 0}
+@media (max-width:900px){.why{grid-template-columns:repeat(2,minmax(0,1fr))} .phases,.opts,.costs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){.page{padding:16px} .hd .sp{margin-left:0;width:100%} .hd h1{font-size:18px} .why,.two{grid-template-columns:minmax(0,1fr)} td.feat-name{white-space:normal}
+ table,thead,tbody,tr,td{display:block;width:auto} thead{display:none} tr{padding:10px 14px;border-bottom:1px solid var(--border)} tr:last-child{border-bottom:0} td{padding:2px 0;border:0} td.feat-desc{min-width:0}}
+
+</style>
+<script>
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('gal-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';d.dataset.theme=t;
+addEventListener('DOMContentLoaded',function(){var b=document.getElementById('theme');b.setAttribute('aria-pressed',t==='dark');
+b.onclick=function(){t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;b.setAttribute('aria-pressed',t==='dark');try{localStorage.setItem('gal-theme',t)}catch(e){}}})})();
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol><symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M10 15V9M14 15V9"/></symbol><symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol><symbol id="i-eyeoff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><path d="M2 2l20 20"/></symbol><symbol id="i-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></symbol><symbol id="i-usd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol><symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol><symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol><symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol></defs></svg>
+<main class="page">
+<header class="hd"><img src="gal-logo.webp" alt="GAL" width="72" height="28"><h1>Roadmap app mobile</h1><span class="pill">Draft v0.1</span><span class="pill">08/07/2026</span><span class="pill">Sản xuất · Văn phòng · Tổ trưởng</span><div class="sp"><nav class="seg" aria-label="Trang"><a href="index.html">Scope</a><a href="roadmap.html" aria-current="page">Roadmap</a></nav><button type="button" class="tb" id="theme" aria-label="Chuyển giao diện sáng / tối"><span class="th-moon"><svg aria-hidden="true"><use href="#i-moon"/></svg></span><span class="th-sun"><svg aria-hidden="true"><use href="#i-sun"/></svg></span></button></div></header>
+<section class="card" style="padding:12px"><div class="why"><div><span class="ic"><svg aria-hidden="true"><use href="#i-camera"/></svg></span><b>Camera mượt, ổn định</b><span class="muted sm">Trình duyệt hay chậm, lỗi tuỳ máy</span></div><div><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><b>Thông báo đến tay</b><span class="muted sm">Trình duyệt hay im lặng, nhất là iPhone</span></div><div><span class="ic"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><b>GPS chuẩn, đỡ pin</b><span class="muted sm">Xác nhận đúng nơi làm việc</span></div><div><span class="ic"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><b>Đúng thói quen</b><span class="muted sm">Việc hằng ngày đều làm trên điện thoại</span></div></div><details class="more"><summary>Giải thích đầy đủ<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+      Đưa các tính năng <strong>nhân viên tự dùng hằng ngày</strong> từ website
+      hiện tại lên ứng dụng điện thoại (iPhone &amp; Android). Website vẫn giữ
+      nguyên, là công cụ làm việc của HR, quản đốc và admin.
+    </p><p class="h2-sub">
+      Nguyên tắc chọn tính năng: app chỉ chứa những gì nhân viên
+      <em>tự thao tác trên dữ liệu của chính mình</em>. Toàn bộ nghiệp vụ quản
+      lý — điều hành (danh mục, phân quyền, báo cáo tổng hợp, kho) vẫn ở
+      website.
+    </p><div class="why-grid">
+      <div class="why-card">
+        <h3>Chấm công bằng camera mượt và ổn định hơn</h3>
+        <p>
+          Mở camera nhận diện khuôn mặt trên trình duyệt điện thoại hay bị chậm,
+          lỗi vặt tuỳ máy. App cài trực tiếp trên máy chạy nhanh và đáng tin cậy
+          hơn hẳn.
+        </p>
+      </div>
+      <div class="why-card">
+        <h3>Thông báo đến tay người dùng thật sự</h3>
+        <p>
+          Thông báo qua trình duyệt trên điện thoại rất hay bị "im lặng", nhất
+          là iPhone. App gửi thông báo như Zalo/Messenger — có phân công mới, có
+          kết quả duyệt đơn là biết ngay.
+        </p>
+      </div>
+      <div class="why-card">
+        <h3>Định vị chính xác hơn, đỡ tốn pin</h3>
+        <p>
+          App đọc vị trí GPS chuẩn hơn trình duyệt — quan trọng cho việc xác
+          nhận nhân viên chấm công đúng tại nơi làm việc.
+        </p>
+      </div>
+      <div class="why-card">
+        <h3>Đúng thói quen của người dùng</h3>
+        <p>
+          Nhân viên hiện trường không ngồi máy tính. Việc họ cần — chấm công,
+          xem việc, gửi đơn, nhận thông báo — đều là việc làm trên điện thoại.
+        </p>
+      </div>
+    </div></details></section>
+<h2 class="sech">3 giai đoạn</h2>
+<div class="phases"><section class="card ph" id="phase-1" style="--pc:var(--p1)"><div class="top"><span class="circ">1</span><h3>Nhân viên sản xuất</h3><span class="chip c-p1" style="margin-left:auto">Bắt buộc</span></div><p class="muted sm">Bỏ hẳn việc mở trình duyệt để chấm công</p><ul><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Đăng nhập</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Chấm công camera + khuôn mặt</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Lịch sử chấm công</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Thông báo đẩy</span></li></ul><span class="chip c-hold" style="justify-self:start">+3 nếu công khai</span></section><section class="card ph" id="phase-2" style="--pc:var(--p2)"><div class="top"><span class="circ">2</span><h3>Nhân viên văn phòng</h3><span class="chip c-p2" style="margin-left:auto">Bắt buộc</span></div><p class="muted sm">Mọi việc thường nhật tự làm trên app</p><ul><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Chấm công văn phòng (GPS)</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Bảng công tháng</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Công việc của tôi</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Xác nhận phân công</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Đơn quên chấm công</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Hộp thông báo</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Hồ sơ cá nhân</span></li></ul></section><section class="card ph" id="phase-3" style="--pc:var(--p3)"><div class="top"><span class="circ">3</span><h3>Tổ trưởng & hiện trường</h3><span class="chip c-p3" style="margin-left:auto">Ưu tiên thấp</span></div><p class="muted sm">Chỉ xét sau khi GĐ1–2 ổn định</p><ul><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Checklist + chụp ảnh</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Kiểm tra nội bộ</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Mượn / trả dụng cụ</span></li><li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Duyệt nhanh cho quản lý</span></li></ul></section></div>
+<section class="card pad"><details class="more"><summary>Giai đoạn 1 · mô tả từng tính năng<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+          Mục tiêu: nhân viên sản xuất bỏ hẳn việc mở trình duyệt để chấm công.
+          Đây là lý do tồn tại của app. (Đăng nhập, lịch sử, thông báo là nền
+          dùng chung cho mọi giai đoạn sau.)
+        </p><div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Tính năng</th>
+              <th>Người dùng làm được gì</th>
+              <th>Mức độ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Đăng nhập</td>
+              <td class="feat-desc">
+                Đăng nhập bằng tài khoản công ty cấp (như trên web), đổi mật
+                khẩu, giữ đăng nhập an toàn trên máy. Nhân viên mới sẽ được nhắc
+                khai báo hồ sơ lần đầu.
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Chấm công sản xuất (camera + khuôn mặt)</td>
+              <td class="feat-desc">
+                Vào ca / ra ca cho công việc sản xuất: mở camera, hệ thống nhận
+                diện khuôn mặt, chọn ca làm việc. Lần đầu dùng sẽ có bước đăng
+                ký khuôn mặt.
+              </td>
+              <td>
+                <span class="pill must">Bắt buộc</span>
+                <span class="pill native">App vượt trội web</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Lịch sử chấm công của tôi</td>
+              <td class="feat-desc">
+                Xem lại các lần vào/ra ca, giờ công, giờ tăng ca theo ngày — chỉ
+                thấy dữ liệu của chính mình. (Bảng công tổng hợp cả tháng sẽ có
+                ở Giai đoạn 2.)
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Thông báo đẩy</td>
+              <td class="feat-desc">
+                Nhận thông báo trên điện thoại: có phân công mới, nhắc chấm
+                công, kết quả duyệt đơn — kể cả khi không mở app.
+              </td>
+              <td>
+                <span class="pill must">Bắt buộc</span>
+                <span class="pill native">App vượt trội web</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Đăng ký tài khoản trong app</td>
+              <td class="feat-desc">
+                Người dùng tự đăng ký tài khoản, kèm bước công ty phê duyệt /
+                gắn vào doanh nghiệp (hoặc chế độ demo cho người ngoài xem). Chỉ
+                làm nếu chọn phương án phát hành công khai trên App Store.
+              </td>
+              <td><span class="pill cond">Nếu phát hành công khai</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Tự xoá tài khoản trong app</td>
+              <td class="feat-desc">
+                Người dùng tự xoá tài khoản và dữ liệu cá nhân (kể cả dữ liệu
+                khuôn mặt) ngay trong app; dữ liệu công / lương vẫn lưu theo
+                nghĩa vụ của công ty. Chỉ làm nếu chọn phương án phát hành công
+                khai.
+              </td>
+              <td><span class="pill cond">Nếu phát hành công khai</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Trang chính sách riêng tư &amp; hỗ trợ</td>
+              <td class="feat-desc">
+                Trang web công khai gồm chính sách riêng tư, điều khoản sử dụng,
+                kênh hỗ trợ — Apple và Google kiểm tra đường link này khi duyệt.
+                Chỉ làm nếu chọn phương án phát hành công khai.
+              </td>
+              <td><span class="pill cond">Nếu phát hành công khai</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div></details><details class="more"><summary>Giai đoạn 2 · mô tả từng tính năng<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+          Mục tiêu: chấm công văn phòng lên app, và mọi việc thường nhật của
+          nhân viên (cả sản xuất lẫn văn phòng) đều tự làm được trên app, không
+          cần nhờ HR hay tổ trưởng làm hộ.
+        </p><div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Tính năng</th>
+              <th>Người dùng làm được gì</th>
+              <th>Mức độ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Chấm công văn phòng</td>
+              <td class="feat-desc">
+                Check-in / check-out hằng ngày theo ca; hệ thống xác nhận đang
+                đứng trong phạm vi nơi làm việc bằng GPS.
+              </td>
+              <td>
+                <span class="pill must">Bắt buộc</span>
+                <span class="pill native">App vượt trội web</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Bảng công tháng của tôi</td>
+              <td class="feat-desc">
+                Theo dõi công cá nhân cả tháng như các app nhân sự phổ biến:
+                lịch tháng đánh dấu ngày đủ công / thiếu / nghỉ / có tăng ca;
+                tổng số công, giờ tăng ca, số lần đi trễ, số lần quên chấm công;
+                bấm vào ngày để xem chi tiết.
+                <em
+                  >Lưu ý: website hiện chưa có màn hình này — đây là tính năng
+                  làm mới riêng cho app, cần thêm phần tổng hợp dữ liệu phía hệ
+                  thống.</em
+                >
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Công việc của tôi</td>
+              <td class="feat-desc">
+                Xem danh sách công việc mình được phân công theo ngày, kèm trạng
+                thái đã chấm công hay chưa.
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Xác nhận phân công</td>
+              <td class="feat-desc">
+                Nhận thông báo được phân việc → bấm xác nhận hoặc từ chối ngay
+                trên app.
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Đơn quên chấm công</td>
+              <td class="feat-desc">
+                Quên chấm công? Tạo đơn ngay trên app, chụp ảnh minh chứng đính
+                kèm, theo dõi đơn được duyệt qua 2 cấp. Người duyệt cũng duyệt
+                được trên app.
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Hộp thông báo</td>
+              <td class="feat-desc">
+                Xem lại mọi thông báo đã nhận, đánh dấu đã đọc, bấm vào là mở
+                đúng màn hình liên quan.
+              </td>
+              <td><span class="pill must">Bắt buộc</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Hồ sơ cá nhân</td>
+              <td class="feat-desc">
+                Xem và cập nhật thông tin cá nhân, ảnh đại diện; khai báo hồ sơ
+                đầy đủ cho nhân viên mới.
+              </td>
+              <td><span class="pill should">Nên có</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div></details><details class="more"><summary>Giai đoạn 3 · mô tả từng tính năng<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+          Đưa các việc hiện trường cần chụp ảnh của tổ trưởng, kiểm tra chất
+          lượng lên app. Ưu tiên thấp — chỉ xem xét sau khi Giai đoạn 1–2 chạy
+          ổn định, không cam kết trong phạm vi ban đầu.
+        </p><div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Tính năng</th>
+              <th>Người dùng làm được gì</th>
+              <th>Mức độ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Checklist công việc + chụp ảnh</td>
+              <td class="feat-desc">
+                Tổ trưởng chụp ảnh xác nhận từng hạng mục công việc, ảnh phạm vi
+                làm việc ngay tại hiện trường.
+              </td>
+              <td>
+                <span class="pill should">Nên có</span>
+                <span class="pill native">App vượt trội web</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Kiểm tra nội bộ — chấm điểm &amp; chụp ảnh
+              </td>
+              <td class="feat-desc">
+                Người kiểm tra chất lượng chấm điểm từng hạng mục và chụp ảnh
+                bằng chứng trực tiếp trên app.
+              </td>
+              <td>
+                <span class="pill should">Nên có</span>
+                <span class="pill native">App vượt trội web</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Mượn / trả dụng cụ</td>
+              <td class="feat-desc">
+                Nhân viên xem mình đang mượn dụng cụ gì, nhận nhắc khi quá hạn,
+                xác nhận mượn/trả.
+              </td>
+              <td><span class="pill should">Nên có</span></td>
+            </tr>
+            <tr>
+              <td class="feat-name">Duyệt nhanh cho quản lý</td>
+              <td class="feat-desc">
+                Quản đốc / tổ trưởng duyệt đơn từ và các yêu cầu phát sinh ngay
+                từ thông báo, không cần mở máy tính.
+              </td>
+              <td><span class="pill should">Nên có</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div></details></section>
+<h2 class="sech">Chốt trước: cách phát hành iPhone</h2>
+<div class="opts"><section class="card opt1 hl"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-eyeoff"/></svg></span><h3>App “ẩn” trên App Store</h3></div><p>Chỉ ai có link riêng mới cài được</p><p class="muted sm">Điện thoại cá nhân · khả năng cao là GAL</p><span class="chip c-pri" style="justify-self:start">Khả năng cao hợp</span></section><section class="card opt1"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-build"/></svg></span><h3>Phát hành riêng doanh nghiệp</h3></div><p>Đẩy thẳng xuống máy công ty quản lý</p><p class="muted sm">Công ty cấp điện thoại cho nhân viên</p></section><section class="card opt1"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-globe"/></svg></span><h3>Công khai trên App Store</h3></div><p>Ai cũng tải được · phải làm thêm 4 việc</p><p class="muted sm">Muốn thương hiệu công khai, mở rộng sau</p></section></div>
+<section class="card pad"><details class="more"><summary>Quy định của Apple chi tiết<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+      Muốn đưa app lên iPhone phải qua vòng kiểm duyệt của Apple. Tin tốt: app
+      nội bộ cho nhân viên, tài khoản do công ty cấp — được miễn vài yêu cầu
+      nặng. Nhưng phải chọn đúng cách phát hành và chuẩn bị đúng hồ sơ.
+    </p><div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">A</span>
+        <h3>Cách phát hành app — quyết định đầu tiên</h3>
+        <span class="phase-tag">Chốt trước khi bắt đầu</span>
+        <p class="goal">
+          Có 3 phương án, đều phải qua Apple kiểm duyệt. Hai phương án đầu dành
+          cho app nội bộ; phương án 3 là đưa app lên kho ứng dụng công khai —
+          làm được nhưng phải xây thêm tính năng để đáp ứng quy định.
+        </p>
+      </div>
+      <div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Phương án</th>
+              <th>Cách hoạt động</th>
+              <th>Phù hợp khi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">App "ẩn" trên App Store</td>
+              <td class="feat-desc">
+                App vẫn nằm trên App Store nhưng không ai tìm thấy được — chỉ
+                người có đường link riêng (do công ty gửi) mới cài được. Không
+                cần cài đặt gì thêm trên máy nhân viên. Apple chính thức nêu
+                "app cho nhân viên" là trường hợp phù hợp.
+              </td>
+              <td class="feat-desc">
+                Nhân viên dùng điện thoại cá nhân — khả năng cao là trường hợp
+                của GAL
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Phát hành riêng cho doanh nghiệp</td>
+              <td class="feat-desc">
+                Công ty đăng ký chương trình quản lý thiết bị của Apple, app
+                được "đẩy" thẳng xuống các máy do công ty quản lý.
+              </td>
+              <td class="feat-desc">
+                Công ty cấp điện thoại cho nhân viên, hoặc đã có hệ thống quản
+                lý thiết bị
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Phát hành công khai trên App Store</td>
+              <td class="feat-desc">
+                App lên App Store bình thường, ai cũng tìm thấy và tải được. Đổi
+                lại phải xây thêm các tính năng theo quy định cho app công khai
+                (danh sách bên dưới) và mất thêm thời gian phát triển + kiểm
+                duyệt gắt hơn.
+              </td>
+              <td class="feat-desc">
+                Muốn thương hiệu xuất hiện công khai, hoặc định mở rộng cho
+                khách hàng / đơn vị khác dùng sau này
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">A+</span>
+        <h3>Nếu chọn phát hành công khai — phải làm thêm gì</h3>
+        <span
+          class="phase-tag"
+          style="background: var(--warn-soft); color: var(--warn)"
+          >Việc phát sinh</span
+        >
+        <p class="goal">
+          App công khai không còn được hưởng các miễn trừ của app nội bộ. Các
+          tính năng phải xây thêm:
+        </p>
+      </div>
+      <div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Việc phải làm thêm</th>
+              <th>Vì sao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Đăng ký tài khoản trong app</td>
+              <td class="feat-desc">
+                App công khai mà tải về không đăng nhập được gì sẽ bị Apple từ
+                chối vì "vô dụng với người tải". Cần luồng tự đăng ký (kèm bước
+                công ty phê duyệt/gắn nhân viên vào doanh nghiệp) hoặc chế độ
+                dùng thử/demo cho người ngoài xem.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Tự xoá tài khoản trong app</td>
+              <td class="feat-desc">
+                Đã cho đăng ký thì bắt buộc phải cho người dùng tự xoá tài khoản
+                và dữ liệu ngay trong app — kèm quy trình phía hệ thống: xoá dữ
+                liệu cá nhân, dữ liệu khuôn mặt, nhưng vẫn giữ dữ liệu
+                công/lương theo nghĩa vụ lưu trữ của công ty (cần tư vấn quy
+                định lao động).
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">
+                Trang chính sách riêng tư &amp; hỗ trợ công khai
+              </td>
+              <td class="feat-desc">
+                Cần trang web công khai: chính sách riêng tư, điều khoản sử
+                dụng, kênh hỗ trợ — Apple và Google đều kiểm tra đường link này.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Đăng nhập bằng Apple (có thể phát sinh)</td>
+              <td class="feat-desc">
+                Chỉ bắt buộc nếu app thêm đăng nhập Google/Facebook. Giữ đăng
+                nhập bằng tài khoản riêng thì vẫn tránh được.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Chuẩn mực giao diện cao hơn</td>
+              <td class="feat-desc">
+                App công khai đại diện thương hiệu và bị kiểm duyệt kỹ hơn về
+                trải nghiệm, màn hình giới thiệu, xử lý lỗi — cần đầu tư thêm
+                phần hoàn thiện.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">B</span>
+        <h3>Các quy định phải tuân thủ</h3>
+        <span class="phase-tag">Làm trong Giai đoạn 1</span>
+      </div>
+      <div class="feat-table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Chủ đề</th>
+              <th>Apple yêu cầu gì</th>
+              <th>Với app GAL nghĩa là gì</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feat-name">Cho phép tự xoá tài khoản</td>
+              <td class="feat-desc">
+                App nào cho người dùng tự đăng ký tài khoản thì phải cho họ tự
+                xoá tài khoản trong app.
+              </td>
+              <td class="feat-desc">
+                <strong>Về nguyên tắc không bị áp dụng</strong> — app không có
+                nút đăng ký, tài khoản do HR cấp. Tuy nhiên người duyệt của
+                Apple hay hỏi lại: cần giải trình rõ khi nộp app + có màn hình
+                hướng dẫn "liên hệ HR để yêu cầu xoá dữ liệu cá nhân". Nội bộ
+                cũng cần thống nhất quy trình xoá dữ liệu cá nhân khi nhân viên
+                nghỉ việc.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Dữ liệu khuôn mặt</td>
+              <td class="feat-desc">
+                Thu thập dữ liệu khuôn mặt phải xin phép rõ ràng, nêu rõ dùng
+                làm gì, và tuyệt đối không dùng vào mục đích khác (quảng cáo,
+                phân tích...).
+              </td>
+              <td class="feat-desc">
+                <strong>Điểm rủi ro lớn nhất khi kiểm duyệt.</strong> Cần: màn
+                hình xin đồng ý trước khi đăng ký khuôn mặt, chính sách riêng tư
+                ghi rõ "chỉ dùng để chấm công", và quy trình xoá dữ liệu khuôn
+                mặt khi nhân viên nghỉ việc.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Vị trí GPS</td>
+              <td class="feat-desc">
+                Phải giải thích lý do xin vị trí; chỉ xin khi cần; không được
+                theo dõi vị trí liên tục nếu không có lý do chính đáng.
+              </td>
+              <td class="feat-desc">
+                App chỉ đọc vị trí <em>tại thời điểm chấm công</em> — tuyệt đối
+                không theo dõi vị trí cả ngày. Xin quyền theo dõi liên tục rất
+                dễ bị Apple từ chối vì bị coi là "giám sát nhân viên".
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Camera / ảnh</td>
+              <td class="feat-desc">
+                Phải nêu rõ lý do dùng camera; khi ghi hình phải có dấu hiệu cho
+                người dùng biết.
+              </td>
+              <td class="feat-desc">
+                Áp dụng cho chấm công bằng camera và các tính năng chụp ảnh minh
+                chứng.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Khai báo quyền riêng tư</td>
+              <td class="feat-desc">
+                Trước khi phát hành phải khai với Apple: app thu thập những dữ
+                liệu gì (vị trí, ảnh, khuôn mặt...) và dùng làm gì. Thông tin
+                này hiện công khai trên trang tải app.
+              </td>
+              <td class="feat-desc">
+                Lập danh sách đầy đủ các loại dữ liệu app thu thập — làm một lần
+                ở Giai đoạn 1, cập nhật mỗi khi thêm tính năng mới.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Thông báo đẩy</td>
+              <td class="feat-desc">
+                Không được ép người dùng bật thông báo mới cho dùng app.
+              </td>
+              <td class="feat-desc">
+                Ai tắt thông báo vẫn phải dùng được mọi tính năng — vào app vẫn
+                thấy phân công, kết quả duyệt đơn.
+              </td>
+            </tr>
+            <tr>
+              <td class="feat-name">Tài khoản cho người kiểm duyệt</td>
+              <td class="feat-desc">
+                App có đăng nhập phải kèm một tài khoản thử để nhân viên Apple
+                vào kiểm tra được mọi tính năng.
+              </td>
+              <td class="feat-desc">
+                Chuẩn bị tài khoản thử + môi trường thử nghiệm truy cập được từ
+                nước ngoài, kèm hướng dẫn thử chấm công (vì người kiểm duyệt
+                không đứng ở nơi làm việc của GAL).
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="h2-sub" style="margin-top: 0.9rem">
+      Phía Android (Google) cũng có bộ quy định tương đương — sẽ lập danh sách
+      riêng khi chốt cách phát hành cho Android. Riêng hình thức app "ẩn"
+      (unlisted) là quy định riêng của Apple —
+      <mark
+        style="
+          background: var(--warn-soft);
+          color: var(--ink);
+          font-weight: 600;
+          padding: 0.05rem 0.3rem;
+          border-radius: 3px;
+        "
+        >Google không có khái niệm này</mark
+      >
+      nên phía Android không cần lo mục A; app nội bộ Android phát hành qua kênh
+      riêng cho doanh nghiệp.
+    </p>
+  </details></section>
+<h2 class="sech">Chi phí duy trì</h2>
+<div class="costs"><section class="card cost1"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-usd"/></svg></span><span class="muted">Apple Developer</span></div><span class="big">99 USD</span><span class="muted sm">/năm · ~2,6 triệu đ</span></section><section class="card cost1"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-usd"/></svg></span><span class="muted">Google Play</span></div><span class="big">25 USD</span><span class="muted sm">một lần · ~650 nghìn đ</span></section><section class="card cost1"><div class="top"><span class="ic"><svg aria-hidden="true"><use href="#i-flag"/></svg></span><span class="muted">Tổng năm đầu</span></div><span class="big" style="color:var(--primary)">124 USD</span><span class="muted sm">cố định, không theo số người dùng</span></section></div>
+<section class="card pad"><details class="more"><summary>Bảng chi phí và ghi chú<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+      Chi phí trả cho Apple / Google để app tồn tại trên kho ứng dụng — chưa gồm
+      chi phí phát triển và vận hành hệ thống. Khuyến nghị đăng ký dưới
+      <strong>tên doanh nghiệp</strong>, không dùng tài khoản cá nhân.
+    </p>
+    <div
+      class="feat-table-scroll"
+      style="
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      "
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>Khoản mục</th>
+            <th>Chi phí</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">
+              Tài khoản Apple Developer<br /><span
+                style="
+                  font-size: 0.78rem;
+                  color: var(--ink-faint);
+                  font-weight: 400;
+                "
+                >cho iPhone</span
+              >
+            </td>
+            <td class="feat-desc" style="white-space: nowrap">
+              99 USD/năm<br /><span
+                style="font-size: 0.78rem; color: var(--ink-faint)"
+                >(~2,6 triệu đ)</span
+              >
+            </td>
+            <td class="feat-desc">
+              Bắt buộc cho mọi phương án phát hành iPhone. Phải gia hạn hằng năm
+              — quên gia hạn là app bị gỡ. Đăng ký dạng doanh nghiệp cần mã định
+              danh D-U-N-S (cấp miễn phí, chờ ~1–2 tuần), tên hiển thị là tên
+              công ty. Nếu chọn phương án "phát hành riêng cho doanh nghiệp" thì
+              đăng ký thêm Apple Business Manager — miễn phí, không phát sinh
+              chi phí.
+            </td>
+          </tr>
+          <tr>
+            <td class="feat-name">
+              Tài khoản Google Play<br /><span
+                style="
+                  font-size: 0.78rem;
+                  color: var(--ink-faint);
+                  font-weight: 400;
+                "
+                >cho Android</span
+              >
+            </td>
+            <td class="feat-desc" style="white-space: nowrap">
+              25 USD một lần<br /><span
+                style="font-size: 0.78rem; color: var(--ink-faint)"
+                >(~650 nghìn đ)</span
+              >
+            </td>
+            <td class="feat-desc">
+              Trả một lần duy nhất, không phải trả hằng năm. Tài khoản doanh
+              nghiệp cần giấy tờ xác minh công ty + mã D-U-N-S.
+            </td>
+          </tr>
+          <tr>
+            <td class="feat-name">Tổng cộng</td>
+            <td class="feat-desc" style="white-space: nowrap">
+              <strong>~99 USD/năm</strong><br /><span
+                style="font-size: 0.78rem; color: var(--ink-faint)"
+                >+ 25 USD năm đầu</span
+              >
+            </td>
+            <td class="feat-desc">
+              Khoản cố định, không phụ thuộc số lượng nhân viên dùng app.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="h2-sub" style="margin-top: 0.9rem">
+      Ngoài ra cần dự trù chi phí vận hành định kỳ không thuộc Apple/Google: cập
+      nhật app theo phiên bản iOS/Android mới mỗi năm, và hạ tầng máy chủ hiện
+      có gánh thêm lượng truy cập từ app.
+    </p>
+  </details></section>
+<section class="card pad"><h2>Kỹ thuật cần chuẩn bị</h2><div class="chips"><span class="ch">Cổng kết nối cho app</span><span class="ch">Đăng nhập an toàn</span><span class="ch">Kênh thông báo mới</span><span class="ch warn">Nhận diện khuôn mặt · cần chốt</span><span class="ch">Phân quyền giữ nguyên</span><span class="ch warn">Chấm công khi mất mạng · cần chốt</span></div><details class="more"><summary>Giải thích từng việc<svg aria-hidden="true"><use href="#i-down"/></svg></summary><p class="h2-sub">
+      Phần dành cho đội kỹ thuật, tóm tắt để mọi người nắm được vì sao cần thời
+      gian chuẩn bị nền móng trước khi thấy tính năng đầu tiên.
+    </p><div class="tech-grid">
+      <div class="tech-card">
+        <h3>Cổng kết nối cho app</h3>
+        <p>
+          Website và app "nói chuyện" với hệ thống theo hai cách khác nhau — cần
+          xây thêm một lớp cổng kết nối cho app. Điểm tốt: phần lõi nghiệp vụ
+          được tái sử dụng nguyên vẹn, không phải viết lại. Đây là hạng mục
+          quyết định khối lượng của Giai đoạn 1.
+        </p>
+      </div>
+      <div class="tech-card">
+        <h3>Đăng nhập an toàn trên điện thoại</h3>
+        <p>
+          Cơ chế tài khoản hiện tại dùng lại được; cần bổ sung cách lưu phiên
+          đăng nhập an toàn trên máy để không phải đăng nhập lại liên tục.
+        </p>
+      </div>
+      <div class="tech-card">
+        <h3>Kênh thông báo mới</h3>
+        <p>
+          Hệ thống gửi thông báo đã được thiết kế sẵn để "cắm thêm" kênh mới —
+          thêm kênh thông báo cho điện thoại không phải đập đi làm lại.
+        </p>
+      </div>
+      <div class="tech-card">
+        <h3>Nhận diện khuôn mặt</h3>
+        <p>
+          Cần chọn một trong hai hướng: nhận diện ngay trên điện thoại (nhanh,
+          chạy được khi mạng yếu) hoặc gửi ảnh về máy chủ xử lý như web hiện tại
+          (đơn giản hơn để làm).
+        </p>
+      </div>
+      <div class="tech-card">
+        <h3>Phân quyền giữ nguyên</h3>
+        <p>
+          Ai thấy nút gì, xem được dữ liệu gì — dùng đúng bộ phân quyền của
+          website hiện tại, không tạo hệ phân quyền riêng cho app.
+        </p>
+      </div>
+      <div class="tech-card">
+        <h3>Chấm công khi mất mạng</h3>
+        <p>
+          Ở xưởng / cầu tàu sóng có thể yếu: app cần ghi nhận lần chấm công tạm
+          trên máy rồi tự gửi lên khi có mạng lại. Cần quyết sớm vì ảnh hưởng
+          cách xây tính năng chấm công.
+        </p>
+      </div>
+    </div></details></section>
+<div class="stackx"><div class="two"><section class="card pad"><div class="top2"><span class="ic"><svg aria-hidden="true"><use href="#i-list"/></svg></span><h3>Ở lại Website</h3></div><p>Danh mục · KHSX · phân công · báo cáo · kho</p></section><section class="card pad"><div class="top2"><span class="ic t-hold"><svg aria-hidden="true"><use href="#i-x"/></svg></span><h3>Không làm (cả hai nơi)</h3></div><p>Tính lương · bê nguyên web lên app · app hoàn toàn offline</p></section></div><details class="more"><summary>Chi tiết phân vai<svg aria-hidden="true"><use href="#i-down"/></svg></summary><div class="scope-cols">
+      <div class="scope-box keep">
+        <h3>Ở lại Website (quản trị)</h3>
+        <ul>
+          <li>
+            Quản lý danh mục: nhân viên, phân quyền, khu vực – đơn vị, dịch vụ,
+            sản phẩm, ca làm việc
+          </li>
+          <li>
+            Kế hoạch sản xuất: tạo lệnh, phân công, điều chuyển, sắp xếp nhân sự
+          </li>
+          <li>Kho dụng cụ: nhập / xuất / kiểm kê</li>
+          <li>Báo cáo tổng hợp, xuất Excel, nhật ký hệ thống</li>
+          <li>Cấu hình hệ thống, gửi thông báo hàng loạt</li>
+        </ul>
+      </div>
+      <div class="scope-box out">
+        <h3>Không làm (cả hai nơi)</h3>
+        <ul>
+          <li>
+            Tính lương trên app — lương thuộc phạm vi website (bộ phận Tài
+            chính)
+          </li>
+          <li>
+            Bê nguyên 100% website lên app — app là công cụ của nhân viên, không
+            phải bản thu nhỏ của website
+          </li>
+          <li>
+            Dùng app hoàn toàn không cần mạng — chỉ riêng chấm công có cơ chế
+            lưu tạm khi mất sóng
+          </li>
+        </ul>
+      </div>
+    </div></details></div>
+<div class="qnote">
+    <strong>Cần chốt trong meeting:</strong> ① Cách phát hành trên iPhone — app
+    "ẩn" (nhân viên dùng máy cá nhân), phát hành riêng cho doanh nghiệp (máy
+    công ty cấp), hay công khai trên App Store (chấp nhận xây thêm đăng ký / xoá
+    tài khoản...); ② Hướng xây cổng kết nối cho app — quyết định lớn nhất về
+    khối lượng công việc; ③ Nhận diện khuôn mặt trên điện thoại hay trên máy chủ
+    + quy trình xin đồng ý và xoá dữ liệu khuôn mặt; ④ Giai đoạn 3 (kiểm tra nội
+    bộ, mượn trả dụng cụ) có đúng nhu cầu tổ trưởng không.
+  </div>
+<footer>
+    Draft nội bộ để thảo luận · Tổng hợp từ tài liệu yêu cầu của hệ thống
+    (.specs) · Chi tiết mã tính năng tham chiếu (F-xxx) có trong bản kỹ
+    thuật.<br />
+    <a href="phieu-nghiem-thu-gal.html" style="color: var(--accent-ink)"
+      >→ Phiếu nghiệm thu (GAL - 02KT)</a
+    >
+    <a href="bien-ban-nghiem-thu-gal.html" style="color: var(--accent-ink)"
+      >→ Biên bản nghiệm thu (GAL - 02KT)</a
+    >
+  </footer>
+</main>
+</body>
+</html>

@@ -1,1240 +1,2399 @@
-<title>Roadmap Mobile App — GAL Chấm Công</title>
-<style>
-  :root {
-    --bg: #f7f6f3;
-    --surface: #ffffff;
-    --ink: #1f2823;
-    --ink-soft: #55604f;
-    --ink-faint: #8a917f;
-    --line: #e0ddd4;
-    --accent: #0e6e5c;
-    --accent-soft: #e3efe9;
-    --accent-ink: #0a5748;
-    --warn: #9a6b1f;
-    --warn-soft: #f5ecd9;
-    --info: #3d5a80;
-    --info-soft: #e4eaf2;
-    --must: #8c3b2e;
-    --must-soft: #f4e5e0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #171c19;
-      --surface: #1f2622;
-      --ink: #e8ebe4;
-      --ink-soft: #aab3a4;
-      --ink-faint: #737d6f;
-      --line: #333c35;
-      --accent: #4fb99f;
-      --accent-soft: #22352e;
-      --accent-ink: #7fd0bb;
-      --warn: #d5a659;
-      --warn-soft: #38301e;
-      --info: #8fadd0;
-      --info-soft: #24303e;
-      --must: #d98a77;
-      --must-soft: #3b2822;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #171c19;
-    --surface: #1f2622;
-    --ink: #e8ebe4;
-    --ink-soft: #aab3a4;
-    --ink-faint: #737d6f;
-    --line: #333c35;
-    --accent: #4fb99f;
-    --accent-soft: #22352e;
-    --accent-ink: #7fd0bb;
-    --warn: #d5a659;
-    --warn-soft: #38301e;
-    --info: #8fadd0;
-    --info-soft: #24303e;
-    --must: #d98a77;
-    --must-soft: #3b2822;
-  }
-  :root[data-theme="light"] {
-    --bg: #f7f6f3;
-    --surface: #ffffff;
-    --ink: #1f2823;
-    --ink-soft: #55604f;
-    --ink-faint: #8a917f;
-    --line: #e0ddd4;
-    --accent: #0e6e5c;
-    --accent-soft: #e3efe9;
-    --accent-ink: #0a5748;
-    --warn: #9a6b1f;
-    --warn-soft: #f5ecd9;
-    --info: #3d5a80;
-    --info-soft: #e4eaf2;
-    --must: #8c3b2e;
-    --must-soft: #f4e5e0;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family:
-      "Avenir Next",
-      "Segoe UI",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    line-height: 1.55;
-    margin: 0;
-    padding: 0 1.25rem 5rem;
-  }
-  .wrap {
-    max-width: 62rem;
-    margin: 0 auto;
-  }
-
-  header.hero {
-    padding: 3.5rem 0 2rem;
-    border-bottom: 2px solid var(--ink);
-  }
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
-  }
-  h1 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    line-height: 1.15;
-    margin: 0 0 0.75rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
-  }
-  .hero p.lede {
-    max-width: 44rem;
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    margin: 0;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-  }
-  .hero-meta strong {
-    color: var(--ink-soft);
-    font-weight: 600;
-  }
-  .hero-meta .audience {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-  .hero-meta .audience strong {
-    color: inherit;
-    font-weight: 700;
-  }
-
-  section {
-    margin-top: 3rem;
-  }
-  h2 {
-    font-size: 1.25rem;
-    margin: 0 0 0.35rem;
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-  }
-  .h2-sub {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin: 0 0 1.25rem;
-    max-width: 44rem;
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.75rem;
-  }
-  .why-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 0.9rem 1rem;
-  }
-  .why-card h3 {
-    margin: 0 0 0.3rem;
-    font-size: 0.92rem;
-  }
-  .why-card p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
-
-  .phase {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    margin-top: 1.25rem;
-    overflow: hidden;
-  }
-  .phase-head {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    flex-wrap: wrap;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .phase-num {
-    font-variant-numeric: tabular-nums;
-    background: var(--accent);
-    color: var(--surface);
-    font-weight: 700;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 4px;
-    flex: none;
-    display: grid;
-    place-items: center;
-    font-size: 0.95rem;
-  }
-  .phase-head h3 {
-    margin: 0;
-    font-size: 1.05rem;
-  }
-  .phase-head .goal {
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-    flex-basis: 100%;
-    margin-left: 2.9rem;
-  }
-  .phase-tag {
-    margin-left: auto;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    background: var(--accent-soft);
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .feat-table-scroll {
-    overflow-x: auto;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 0.87rem;
-  }
-  th {
-    text-align: left;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: var(--ink-faint);
-    font-weight: 600;
-    padding: 0.7rem 1rem 0.45rem;
-    border-bottom: 1px solid var(--line);
-  }
-  td {
-    padding: 0.65rem 1rem;
-    border-bottom: 1px solid var(--line);
-    vertical-align: top;
-  }
-  tr:last-child td {
-    border-bottom: none;
-  }
-  td.feat-name {
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  td.feat-desc {
-    color: var(--ink-soft);
-    min-width: 16rem;
-  }
-  td.feat-src {
-    color: var(--ink-faint);
-    font-size: 0.78rem;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .pill {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.15rem 0.55rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .pill.must {
-    background: var(--must-soft);
-    color: var(--must);
-  }
-  .pill.should {
-    background: var(--info-soft);
-    color: var(--info);
-  }
-  .pill.native {
-    background: var(--warn-soft);
-    color: var(--warn);
-  }
-  .pill.cond {
-    background: var(--warn-soft);
-    color: var(--warn);
-    border: 1px dashed var(--warn);
-  }
-
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    gap: 0.75rem;
-  }
-  .tech-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 0.9rem 1rem;
-  }
-  .tech-card h3 {
-    margin: 0 0 0.3rem;
-    font-size: 0.92rem;
-  }
-  .tech-card p {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
-
-  .scope-cols {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 0.75rem;
-  }
-  .scope-box {
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--surface);
-    padding: 1rem 1.15rem;
-  }
-  .scope-box h3 {
-    margin: 0 0 0.6rem;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .scope-box.keep h3 {
-    color: var(--accent-ink);
-  }
-  .scope-box.out h3 {
-    color: var(--must);
-  }
-  .scope-box ul {
-    margin: 0;
-    padding-left: 1.1rem;
-    font-size: 0.87rem;
-    color: var(--ink-soft);
-  }
-  .scope-box li {
-    margin-bottom: 0.35rem;
-  }
-  .scope-box li:last-child {
-    margin-bottom: 0;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-  .timeline {
-    display: flex;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-top: 1rem;
-  }
-  .timeline .seg {
-    padding: 0.6rem 0.9rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--surface);
-    text-decoration: none;
-    cursor: pointer;
-    transition: filter 0.15s ease;
-  }
-  .timeline .seg:hover,
-  .timeline .seg:focus-visible {
-    filter: brightness(1.12);
-    text-decoration: underline;
-  }
-  .timeline .seg:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: -2px;
-  }
-  .seg.p1 {
-    background: var(--accent);
-    flex: 5;
-  }
-  .seg.p2 {
-    background: color-mix(in srgb, var(--accent) 72%, var(--bg));
-    flex: 4;
-  }
-  .seg.p3 {
-    background: color-mix(in srgb, var(--accent) 48%, var(--bg));
-    flex: 4;
-  }
-  .phase {
-    scroll-margin-top: 1rem;
-  }
-
-  .qnote {
-    margin-top: 2.5rem;
-    border-left: 3px solid var(--warn);
-    background: var(--warn-soft);
-    border-radius: 0 6px 6px 0;
-    padding: 0.85rem 1.1rem;
-    font-size: 0.87rem;
-    color: var(--ink-soft);
-  }
-  .qnote strong {
-    color: var(--ink);
-  }
-  footer {
-    margin-top: 3rem;
-    font-size: 0.75rem;
-    color: var(--ink-faint);
-    border-top: 1px solid var(--line);
-    padding-top: 1rem;
-  }
-</style>
-
-<div class="wrap">
-  <header class="hero">
-    <p class="eyebrow">GAL Chấm Công · Đề xuất — Draft v0.1</p>
-    <h1>Roadmap ứng dụng điện thoại cho nhân viên</h1>
-    <p class="lede">
-      Đưa các tính năng <strong>nhân viên tự dùng hằng ngày</strong> từ website
-      hiện tại lên ứng dụng điện thoại (iPhone &amp; Android). Website vẫn giữ
-      nguyên, là công cụ làm việc của HR, quản đốc và admin.
-    </p>
-    <div class="hero-meta">
-      <span class="audience"
-        ><strong>Đối tượng dùng app:</strong> Nhân viên sản xuất · Nhân viên văn
-        phòng · Tổ trưởng</span
-      >
-      <span><strong>Ngày:</strong> 08/07/2026</span>
-    </div>
-  </header>
-
-  <section>
-    <h2>Vì sao cần app điện thoại</h2>
-    <div class="why-grid">
-      <div class="why-card">
-        <h3>Chấm công bằng camera mượt và ổn định hơn</h3>
-        <p>
-          Mở camera nhận diện khuôn mặt trên trình duyệt điện thoại hay bị chậm,
-          lỗi vặt tuỳ máy. App cài trực tiếp trên máy chạy nhanh và đáng tin cậy
-          hơn hẳn.
-        </p>
-      </div>
-      <div class="why-card">
-        <h3>Thông báo đến tay người dùng thật sự</h3>
-        <p>
-          Thông báo qua trình duyệt trên điện thoại rất hay bị "im lặng", nhất
-          là iPhone. App gửi thông báo như Zalo/Messenger — có phân công mới, có
-          kết quả duyệt đơn là biết ngay.
-        </p>
-      </div>
-      <div class="why-card">
-        <h3>Định vị chính xác hơn, đỡ tốn pin</h3>
-        <p>
-          App đọc vị trí GPS chuẩn hơn trình duyệt — quan trọng cho việc xác
-          nhận nhân viên chấm công đúng tại nơi làm việc.
-        </p>
-      </div>
-      <div class="why-card">
-        <h3>Đúng thói quen của người dùng</h3>
-        <p>
-          Nhân viên hiện trường không ngồi máy tính. Việc họ cần — chấm công,
-          xem việc, gửi đơn, nhận thông báo — đều là việc làm trên điện thoại.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Roadmap 3 giai đoạn</h2>
-    <p class="h2-sub">
-      Nguyên tắc chọn tính năng: app chỉ chứa những gì nhân viên
-      <em>tự thao tác trên dữ liệu của chính mình</em>. Toàn bộ nghiệp vụ quản
-      lý — điều hành (danh mục, phân quyền, báo cáo tổng hợp, kho) vẫn ở
-      website.
-    </p>
-
-    <nav class="timeline" aria-label="Chuyển nhanh tới giai đoạn">
-      <a class="seg p1" href="#phase-1"
-        >Giai đoạn 1 — Tính năng phục vụ Nhân viên sản xuất</a
-      >
-      <a class="seg p2" href="#phase-2"
-        >Giai đoạn 2 — Tính năng phục vụ Nhân viên văn phòng</a
-      >
-      <a class="seg p3" href="#phase-3"
-        >Giai đoạn 3 — Tính năng phục vụ Tổ trưởng (ưu tiên thấp)</a
-      >
-    </nav>
-
-    <div class="phase" id="phase-1">
-      <div class="phase-head">
-        <span class="phase-num">1</span>
-        <h3>Tính năng phục vụ Nhân viên sản xuất</h3>
-        <span class="phase-tag">Bắt buộc</span>
-        <p class="goal">
-          Mục tiêu: nhân viên sản xuất bỏ hẳn việc mở trình duyệt để chấm công.
-          Đây là lý do tồn tại của app. (Đăng nhập, lịch sử, thông báo là nền
-          dùng chung cho mọi giai đoạn sau.)
-        </p>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Tính năng</th>
-              <th>Người dùng làm được gì</th>
-              <th>Mức độ</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Đăng nhập</td>
-              <td class="feat-desc">
-                Đăng nhập bằng tài khoản công ty cấp (như trên web), đổi mật
-                khẩu, giữ đăng nhập an toàn trên máy. Nhân viên mới sẽ được nhắc
-                khai báo hồ sơ lần đầu.
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Chấm công sản xuất (camera + khuôn mặt)</td>
-              <td class="feat-desc">
-                Vào ca / ra ca cho công việc sản xuất: mở camera, hệ thống nhận
-                diện khuôn mặt, chọn ca làm việc. Lần đầu dùng sẽ có bước đăng
-                ký khuôn mặt.
-              </td>
-              <td>
-                <span class="pill must">Bắt buộc</span>
-                <span class="pill native">App vượt trội web</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Lịch sử chấm công của tôi</td>
-              <td class="feat-desc">
-                Xem lại các lần vào/ra ca, giờ công, giờ tăng ca theo ngày — chỉ
-                thấy dữ liệu của chính mình. (Bảng công tổng hợp cả tháng sẽ có
-                ở Giai đoạn 2.)
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Thông báo đẩy</td>
-              <td class="feat-desc">
-                Nhận thông báo trên điện thoại: có phân công mới, nhắc chấm
-                công, kết quả duyệt đơn — kể cả khi không mở app.
-              </td>
-              <td>
-                <span class="pill must">Bắt buộc</span>
-                <span class="pill native">App vượt trội web</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Đăng ký tài khoản trong app</td>
-              <td class="feat-desc">
-                Người dùng tự đăng ký tài khoản, kèm bước công ty phê duyệt /
-                gắn vào doanh nghiệp (hoặc chế độ demo cho người ngoài xem). Chỉ
-                làm nếu chọn phương án phát hành công khai trên App Store.
-              </td>
-              <td><span class="pill cond">Nếu phát hành công khai</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Tự xoá tài khoản trong app</td>
-              <td class="feat-desc">
-                Người dùng tự xoá tài khoản và dữ liệu cá nhân (kể cả dữ liệu
-                khuôn mặt) ngay trong app; dữ liệu công / lương vẫn lưu theo
-                nghĩa vụ của công ty. Chỉ làm nếu chọn phương án phát hành công
-                khai.
-              </td>
-              <td><span class="pill cond">Nếu phát hành công khai</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Trang chính sách riêng tư &amp; hỗ trợ</td>
-              <td class="feat-desc">
-                Trang web công khai gồm chính sách riêng tư, điều khoản sử dụng,
-                kênh hỗ trợ — Apple và Google kiểm tra đường link này khi duyệt.
-                Chỉ làm nếu chọn phương án phát hành công khai.
-              </td>
-              <td><span class="pill cond">Nếu phát hành công khai</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="phase" id="phase-2">
-      <div class="phase-head">
-        <span class="phase-num">2</span>
-        <h3>Tính năng phục vụ Nhân viên văn phòng</h3>
-        <span class="phase-tag">Bắt buộc</span>
-        <p class="goal">
-          Mục tiêu: chấm công văn phòng lên app, và mọi việc thường nhật của
-          nhân viên (cả sản xuất lẫn văn phòng) đều tự làm được trên app, không
-          cần nhờ HR hay tổ trưởng làm hộ.
-        </p>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Tính năng</th>
-              <th>Người dùng làm được gì</th>
-              <th>Mức độ</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Chấm công văn phòng</td>
-              <td class="feat-desc">
-                Check-in / check-out hằng ngày theo ca; hệ thống xác nhận đang
-                đứng trong phạm vi nơi làm việc bằng GPS.
-              </td>
-              <td>
-                <span class="pill must">Bắt buộc</span>
-                <span class="pill native">App vượt trội web</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Bảng công tháng của tôi</td>
-              <td class="feat-desc">
-                Theo dõi công cá nhân cả tháng như các app nhân sự phổ biến:
-                lịch tháng đánh dấu ngày đủ công / thiếu / nghỉ / có tăng ca;
-                tổng số công, giờ tăng ca, số lần đi trễ, số lần quên chấm công;
-                bấm vào ngày để xem chi tiết.
-                <em
-                  >Lưu ý: website hiện chưa có màn hình này — đây là tính năng
-                  làm mới riêng cho app, cần thêm phần tổng hợp dữ liệu phía hệ
-                  thống.</em
-                >
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Công việc của tôi</td>
-              <td class="feat-desc">
-                Xem danh sách công việc mình được phân công theo ngày, kèm trạng
-                thái đã chấm công hay chưa.
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Xác nhận phân công</td>
-              <td class="feat-desc">
-                Nhận thông báo được phân việc → bấm xác nhận hoặc từ chối ngay
-                trên app.
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Đơn quên chấm công</td>
-              <td class="feat-desc">
-                Quên chấm công? Tạo đơn ngay trên app, chụp ảnh minh chứng đính
-                kèm, theo dõi đơn được duyệt qua 2 cấp. Người duyệt cũng duyệt
-                được trên app.
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Hộp thông báo</td>
-              <td class="feat-desc">
-                Xem lại mọi thông báo đã nhận, đánh dấu đã đọc, bấm vào là mở
-                đúng màn hình liên quan.
-              </td>
-              <td><span class="pill must">Bắt buộc</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Hồ sơ cá nhân</td>
-              <td class="feat-desc">
-                Xem và cập nhật thông tin cá nhân, ảnh đại diện; khai báo hồ sơ
-                đầy đủ cho nhân viên mới.
-              </td>
-              <td><span class="pill should">Nên có</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="phase" id="phase-3">
-      <div class="phase-head">
-        <span class="phase-num">3</span>
-        <h3>Tính năng phục vụ Tổ trưởng &amp; hiện trường</h3>
-        <span
-          class="phase-tag"
-          style="background: var(--warn-soft); color: var(--warn)"
-          >Ưu tiên thấp</span
-        >
-        <p class="goal">
-          Đưa các việc hiện trường cần chụp ảnh của tổ trưởng, kiểm tra chất
-          lượng lên app. Ưu tiên thấp — chỉ xem xét sau khi Giai đoạn 1–2 chạy
-          ổn định, không cam kết trong phạm vi ban đầu.
-        </p>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Tính năng</th>
-              <th>Người dùng làm được gì</th>
-              <th>Mức độ</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Checklist công việc + chụp ảnh</td>
-              <td class="feat-desc">
-                Tổ trưởng chụp ảnh xác nhận từng hạng mục công việc, ảnh phạm vi
-                làm việc ngay tại hiện trường.
-              </td>
-              <td>
-                <span class="pill should">Nên có</span>
-                <span class="pill native">App vượt trội web</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">
-                Kiểm tra nội bộ — chấm điểm &amp; chụp ảnh
-              </td>
-              <td class="feat-desc">
-                Người kiểm tra chất lượng chấm điểm từng hạng mục và chụp ảnh
-                bằng chứng trực tiếp trên app.
-              </td>
-              <td>
-                <span class="pill should">Nên có</span>
-                <span class="pill native">App vượt trội web</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Mượn / trả dụng cụ</td>
-              <td class="feat-desc">
-                Nhân viên xem mình đang mượn dụng cụ gì, nhận nhắc khi quá hạn,
-                xác nhận mượn/trả.
-              </td>
-              <td><span class="pill should">Nên có</span></td>
-            </tr>
-            <tr>
-              <td class="feat-name">Duyệt nhanh cho quản lý</td>
-              <td class="feat-desc">
-                Quản đốc / tổ trưởng duyệt đơn từ và các yêu cầu phát sinh ngay
-                từ thông báo, không cần mở máy tính.
-              </td>
-              <td><span class="pill should">Nên có</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Quy định của Apple — phải tính từ đầu</h2>
-    <p class="h2-sub">
-      Muốn đưa app lên iPhone phải qua vòng kiểm duyệt của Apple. Tin tốt: app
-      nội bộ cho nhân viên, tài khoản do công ty cấp — được miễn vài yêu cầu
-      nặng. Nhưng phải chọn đúng cách phát hành và chuẩn bị đúng hồ sơ.
-    </p>
-
-    <div class="phase">
-      <div class="phase-head">
-        <span class="phase-num">A</span>
-        <h3>Cách phát hành app — quyết định đầu tiên</h3>
-        <span class="phase-tag">Chốt trước khi bắt đầu</span>
-        <p class="goal">
-          Có 3 phương án, đều phải qua Apple kiểm duyệt. Hai phương án đầu dành
-          cho app nội bộ; phương án 3 là đưa app lên kho ứng dụng công khai —
-          làm được nhưng phải xây thêm tính năng để đáp ứng quy định.
-        </p>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Phương án</th>
-              <th>Cách hoạt động</th>
-              <th>Phù hợp khi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">App "ẩn" trên App Store</td>
-              <td class="feat-desc">
-                App vẫn nằm trên App Store nhưng không ai tìm thấy được — chỉ
-                người có đường link riêng (do công ty gửi) mới cài được. Không
-                cần cài đặt gì thêm trên máy nhân viên. Apple chính thức nêu
-                "app cho nhân viên" là trường hợp phù hợp.
-              </td>
-              <td class="feat-desc">
-                Nhân viên dùng điện thoại cá nhân — khả năng cao là trường hợp
-                của GAL
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Phát hành riêng cho doanh nghiệp</td>
-              <td class="feat-desc">
-                Công ty đăng ký chương trình quản lý thiết bị của Apple, app
-                được "đẩy" thẳng xuống các máy do công ty quản lý.
-              </td>
-              <td class="feat-desc">
-                Công ty cấp điện thoại cho nhân viên, hoặc đã có hệ thống quản
-                lý thiết bị
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Phát hành công khai trên App Store</td>
-              <td class="feat-desc">
-                App lên App Store bình thường, ai cũng tìm thấy và tải được. Đổi
-                lại phải xây thêm các tính năng theo quy định cho app công khai
-                (danh sách bên dưới) và mất thêm thời gian phát triển + kiểm
-                duyệt gắt hơn.
-              </td>
-              <td class="feat-desc">
-                Muốn thương hiệu xuất hiện công khai, hoặc định mở rộng cho
-                khách hàng / đơn vị khác dùng sau này
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="phase">
-      <div class="phase-head">
-        <span class="phase-num">A+</span>
-        <h3>Nếu chọn phát hành công khai — phải làm thêm gì</h3>
-        <span
-          class="phase-tag"
-          style="background: var(--warn-soft); color: var(--warn)"
-          >Việc phát sinh</span
-        >
-        <p class="goal">
-          App công khai không còn được hưởng các miễn trừ của app nội bộ. Các
-          tính năng phải xây thêm:
-        </p>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Việc phải làm thêm</th>
-              <th>Vì sao</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Đăng ký tài khoản trong app</td>
-              <td class="feat-desc">
-                App công khai mà tải về không đăng nhập được gì sẽ bị Apple từ
-                chối vì "vô dụng với người tải". Cần luồng tự đăng ký (kèm bước
-                công ty phê duyệt/gắn nhân viên vào doanh nghiệp) hoặc chế độ
-                dùng thử/demo cho người ngoài xem.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Tự xoá tài khoản trong app</td>
-              <td class="feat-desc">
-                Đã cho đăng ký thì bắt buộc phải cho người dùng tự xoá tài khoản
-                và dữ liệu ngay trong app — kèm quy trình phía hệ thống: xoá dữ
-                liệu cá nhân, dữ liệu khuôn mặt, nhưng vẫn giữ dữ liệu
-                công/lương theo nghĩa vụ lưu trữ của công ty (cần tư vấn quy
-                định lao động).
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">
-                Trang chính sách riêng tư &amp; hỗ trợ công khai
-              </td>
-              <td class="feat-desc">
-                Cần trang web công khai: chính sách riêng tư, điều khoản sử
-                dụng, kênh hỗ trợ — Apple và Google đều kiểm tra đường link này.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Đăng nhập bằng Apple (có thể phát sinh)</td>
-              <td class="feat-desc">
-                Chỉ bắt buộc nếu app thêm đăng nhập Google/Facebook. Giữ đăng
-                nhập bằng tài khoản riêng thì vẫn tránh được.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Chuẩn mực giao diện cao hơn</td>
-              <td class="feat-desc">
-                App công khai đại diện thương hiệu và bị kiểm duyệt kỹ hơn về
-                trải nghiệm, màn hình giới thiệu, xử lý lỗi — cần đầu tư thêm
-                phần hoàn thiện.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="phase">
-      <div class="phase-head">
-        <span class="phase-num">B</span>
-        <h3>Các quy định phải tuân thủ</h3>
-        <span class="phase-tag">Làm trong Giai đoạn 1</span>
-      </div>
-      <div class="feat-table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Chủ đề</th>
-              <th>Apple yêu cầu gì</th>
-              <th>Với app GAL nghĩa là gì</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="feat-name">Cho phép tự xoá tài khoản</td>
-              <td class="feat-desc">
-                App nào cho người dùng tự đăng ký tài khoản thì phải cho họ tự
-                xoá tài khoản trong app.
-              </td>
-              <td class="feat-desc">
-                <strong>Về nguyên tắc không bị áp dụng</strong> — app không có
-                nút đăng ký, tài khoản do HR cấp. Tuy nhiên người duyệt của
-                Apple hay hỏi lại: cần giải trình rõ khi nộp app + có màn hình
-                hướng dẫn "liên hệ HR để yêu cầu xoá dữ liệu cá nhân". Nội bộ
-                cũng cần thống nhất quy trình xoá dữ liệu cá nhân khi nhân viên
-                nghỉ việc.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Dữ liệu khuôn mặt</td>
-              <td class="feat-desc">
-                Thu thập dữ liệu khuôn mặt phải xin phép rõ ràng, nêu rõ dùng
-                làm gì, và tuyệt đối không dùng vào mục đích khác (quảng cáo,
-                phân tích...).
-              </td>
-              <td class="feat-desc">
-                <strong>Điểm rủi ro lớn nhất khi kiểm duyệt.</strong> Cần: màn
-                hình xin đồng ý trước khi đăng ký khuôn mặt, chính sách riêng tư
-                ghi rõ "chỉ dùng để chấm công", và quy trình xoá dữ liệu khuôn
-                mặt khi nhân viên nghỉ việc.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Vị trí GPS</td>
-              <td class="feat-desc">
-                Phải giải thích lý do xin vị trí; chỉ xin khi cần; không được
-                theo dõi vị trí liên tục nếu không có lý do chính đáng.
-              </td>
-              <td class="feat-desc">
-                App chỉ đọc vị trí <em>tại thời điểm chấm công</em> — tuyệt đối
-                không theo dõi vị trí cả ngày. Xin quyền theo dõi liên tục rất
-                dễ bị Apple từ chối vì bị coi là "giám sát nhân viên".
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Camera / ảnh</td>
-              <td class="feat-desc">
-                Phải nêu rõ lý do dùng camera; khi ghi hình phải có dấu hiệu cho
-                người dùng biết.
-              </td>
-              <td class="feat-desc">
-                Áp dụng cho chấm công bằng camera và các tính năng chụp ảnh minh
-                chứng.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Khai báo quyền riêng tư</td>
-              <td class="feat-desc">
-                Trước khi phát hành phải khai với Apple: app thu thập những dữ
-                liệu gì (vị trí, ảnh, khuôn mặt...) và dùng làm gì. Thông tin
-                này hiện công khai trên trang tải app.
-              </td>
-              <td class="feat-desc">
-                Lập danh sách đầy đủ các loại dữ liệu app thu thập — làm một lần
-                ở Giai đoạn 1, cập nhật mỗi khi thêm tính năng mới.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Thông báo đẩy</td>
-              <td class="feat-desc">
-                Không được ép người dùng bật thông báo mới cho dùng app.
-              </td>
-              <td class="feat-desc">
-                Ai tắt thông báo vẫn phải dùng được mọi tính năng — vào app vẫn
-                thấy phân công, kết quả duyệt đơn.
-              </td>
-            </tr>
-            <tr>
-              <td class="feat-name">Tài khoản cho người kiểm duyệt</td>
-              <td class="feat-desc">
-                App có đăng nhập phải kèm một tài khoản thử để nhân viên Apple
-                vào kiểm tra được mọi tính năng.
-              </td>
-              <td class="feat-desc">
-                Chuẩn bị tài khoản thử + môi trường thử nghiệm truy cập được từ
-                nước ngoài, kèm hướng dẫn thử chấm công (vì người kiểm duyệt
-                không đứng ở nơi làm việc của GAL).
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <p class="h2-sub" style="margin-top: 0.9rem">
-      Phía Android (Google) cũng có bộ quy định tương đương — sẽ lập danh sách
-      riêng khi chốt cách phát hành cho Android. Riêng hình thức app "ẩn"
-      (unlisted) là quy định riêng của Apple —
-      <mark
-        style="
-          background: var(--warn-soft);
-          color: var(--ink);
-          font-weight: 600;
-          padding: 0.05rem 0.3rem;
-          border-radius: 3px;
-        "
-        >Google không có khái niệm này</mark
-      >
-      nên phía Android không cần lo mục A; app nội bộ Android phát hành qua kênh
-      riêng cho doanh nghiệp.
-    </p>
-  </section>
-
-  <section>
-    <h2>Chi phí duy trì app hằng năm</h2>
-    <p class="h2-sub">
-      Chi phí trả cho Apple / Google để app tồn tại trên kho ứng dụng — chưa gồm
-      chi phí phát triển và vận hành hệ thống. Khuyến nghị đăng ký dưới
-      <strong>tên doanh nghiệp</strong>, không dùng tài khoản cá nhân.
-    </p>
-    <div
-      class="feat-table-scroll"
-      style="
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scope GAL Chấm Công</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      :root {
+        --primary: #0e6e5c;
+        --background: #f4f4f6;
+        --surface: #fff;
+        --foreground: #2c2c2c;
+        --muted: #707070;
+        --border: #eeeff1;
+        --border-strong: #e2e3e6;
+        --hover: #f8f8fa;
+        --s-done: #007a55;
+        --s-done-bg: #ecfdf5;
+        --s-wait: #bb4d00;
+        --s-wait-bg: #fffbeb;
+        --s-ask: #6d44a8;
+        --s-ask-bg: #f4effb;
+        --s-hold: #52525c;
+        --s-hold-bg: #f4f4f5;
+        --p1: #0e6e5c;
+        --p2: #1f7a8c;
+        --p3: #6b7280;
+        --on-p: #fff;
+        --bar-done: #12a06f;
+        --bar-wait: #e07b1a;
+        --bar-ask: #8b5cf6;
+        --bar-hold: #a3a3ab;
+        --primary-light: color-mix(in srgb, var(--primary) 9%, transparent);
+        --ring-focus: color-mix(in srgb, var(--primary) 12%, transparent);
+        --border-focus: var(--primary);
+        --f-body:
+          "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --r: 12px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --primary: #5fc4b6;
+          --background: #0b1110;
+          --surface: #121b19;
+          --foreground: #e3ece9;
+          --muted: #93a39f;
+          --border: #1b2825;
+          --border-strong: #243531;
+          --hover: #16211f;
+          --s-done: #52c488;
+          --s-done-bg: #52c48826;
+          --s-wait: #e0a640;
+          --s-wait-bg: #e0a64026;
+          --s-ask: #b998e6;
+          --s-ask-bg: #b998e626;
+          --s-hold: #97a3a0;
+          --s-hold-bg: #97a3a022;
+          --p1: #5fc4b6;
+          --p2: #5db7cc;
+          --p3: #9aa3ad;
+          --on-p: #0b1110;
+          --bar-done: #52c488;
+          --bar-wait: #e0a640;
+          --bar-ask: #b998e6;
+          --bar-hold: #7c8885;
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --primary: #5fc4b6;
+        --background: #0b1110;
+        --surface: #121b19;
+        --foreground: #e3ece9;
+        --muted: #93a39f;
+        --border: #1b2825;
+        --border-strong: #243531;
+        --hover: #16211f;
+        --s-done: #52c488;
+        --s-done-bg: #52c48826;
+        --s-wait: #e0a640;
+        --s-wait-bg: #e0a64026;
+        --s-ask: #b998e6;
+        --s-ask-bg: #b998e626;
+        --s-hold: #97a3a0;
+        --s-hold-bg: #97a3a022;
+        --p1: #5fc4b6;
+        --p2: #5db7cc;
+        --p3: #9aa3ad;
+        --on-p: #0b1110;
+        --bar-done: #52c488;
+        --bar-wait: #e0a640;
+        --bar-ask: #b998e6;
+        --bar-hold: #7c8885;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      * {
+        --scrollbar-thumb: transparent;
+      }
+      *:hover {
+        --scrollbar-thumb: color-mix(
+          in srgb,
+          var(--foreground) 16%,
+          transparent
+        );
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 9999px;
+      }
+      @supports not selector(::-webkit-scrollbar) {
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+        }
+        *:hover {
+          scrollbar-color: color-mix(
+              in srgb,
+              var(--foreground) 18%,
+              transparent
+            )
+            transparent;
+        }
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--foreground);
+        font: 14px/1.5 var(--f-body);
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .sm {
+        font-size: 12.5px;
+      }
+      .nw {
+        white-space: nowrap;
+      }
+      .num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 24px 16px 64px;
+        display: grid;
+        gap: 16px;
+      }
+      .page > * {
+        min-width: 0;
+      }
+      .card {
         background: var(--surface);
-        border: 1px solid var(--line);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+      }
+      h2 {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+      h3 {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .hd {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .hd img {
+        height: 28px;
+        width: auto;
+        border-radius: 6px;
+        background: #fff;
+        padding: 2px;
+      }
+      .hd h1 {
+        font-size: 20px;
+        line-height: 1.25;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .hd .sp {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .tb {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--border-strong);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--foreground);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        padding: 0;
+      }
+      .tb:hover {
+        background: color-mix(in srgb, var(--foreground) 9%, var(--surface));
+      }
+      .tb span {
+        display: grid;
+      }
+      :root[data-theme="dark"] .th-moon,
+      :root:not([data-theme="dark"]) .th-sun {
+        display: none;
+      }
+      .seg {
+        display: inline-flex;
+        gap: 2px;
+        padding: 3px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--foreground) 9%, transparent);
+      }
+      .seg a,
+      .seg label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 14px;
         border-radius: 8px;
-      "
-    >
-      <table>
-        <thead>
-          <tr>
-            <th>Khoản mục</th>
-            <th>Chi phí</th>
-            <th>Ghi chú</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="feat-name">
-              Tài khoản Apple Developer<br /><span
-                style="
-                  font-size: 0.78rem;
-                  color: var(--ink-faint);
-                  font-weight: 400;
-                "
-                >cho iPhone</span
-              >
-            </td>
-            <td class="feat-desc" style="white-space: nowrap">
-              99 USD/năm<br /><span
-                style="font-size: 0.78rem; color: var(--ink-faint)"
-                >(~2,6 triệu đ)</span
-              >
-            </td>
-            <td class="feat-desc">
-              Bắt buộc cho mọi phương án phát hành iPhone. Phải gia hạn hằng năm
-              — quên gia hạn là app bị gỡ. Đăng ký dạng doanh nghiệp cần mã định
-              danh D-U-N-S (cấp miễn phí, chờ ~1–2 tuần), tên hiển thị là tên
-              công ty. Nếu chọn phương án "phát hành riêng cho doanh nghiệp" thì
-              đăng ký thêm Apple Business Manager — miễn phí, không phát sinh
-              chi phí.
-            </td>
-          </tr>
-          <tr>
-            <td class="feat-name">
-              Tài khoản Google Play<br /><span
-                style="
-                  font-size: 0.78rem;
-                  color: var(--ink-faint);
-                  font-weight: 400;
-                "
-                >cho Android</span
-              >
-            </td>
-            <td class="feat-desc" style="white-space: nowrap">
-              25 USD một lần<br /><span
-                style="font-size: 0.78rem; color: var(--ink-faint)"
-                >(~650 nghìn đ)</span
-              >
-            </td>
-            <td class="feat-desc">
-              Trả một lần duy nhất, không phải trả hằng năm. Tài khoản doanh
-              nghiệp cần giấy tờ xác minh công ty + mã D-U-N-S.
-            </td>
-          </tr>
-          <tr>
-            <td class="feat-name">Tổng cộng</td>
-            <td class="feat-desc" style="white-space: nowrap">
-              <strong>~99 USD/năm</strong><br /><span
-                style="font-size: 0.78rem; color: var(--ink-faint)"
-                >+ 25 USD năm đầu</span
-              >
-            </td>
-            <td class="feat-desc">
-              Khoản cố định, không phụ thuộc số lượng nhân viên dùng app.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="h2-sub" style="margin-top: 0.9rem">
-      Ngoài ra cần dự trù chi phí vận hành định kỳ không thuộc Apple/Google: cập
-      nhật app theo phiên bản iOS/Android mới mỗi năm, và hạ tầng máy chủ hiện
-      có gánh thêm lượng truy cập từ app.
-    </p>
-  </section>
+        color: color-mix(in srgb, var(--foreground) 75%, var(--surface));
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .seg a:hover,
+      .seg label:hover {
+        color: var(--foreground);
+      }
+      .seg [aria-current] {
+        background: var(--surface);
+        color: var(--foreground);
+        font-weight: 600;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0/0.05),
+          0 1px 2px rgb(0 0 0/0.06);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 10px;
+        border-radius: 999px;
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        font-size: 12.5px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 9px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--fg);
+        background: var(--bg);
+      }
+      .c-done,
+      .t-done {
+        --fg: var(--s-done);
+        --bg: var(--s-done-bg);
+      }
+      .c-wait,
+      .t-wait {
+        --fg: var(--s-wait);
+        --bg: var(--s-wait-bg);
+      }
+      .c-ask,
+      .t-ask {
+        --fg: var(--s-ask);
+        --bg: var(--s-ask-bg);
+      }
+      .c-hold,
+      .t-hold {
+        --fg: var(--s-hold);
+        --bg: var(--s-hold-bg);
+      }
+      .c-p1 {
+        --fg: var(--on-p);
+        --bg: var(--p1);
+      }
+      .c-p2 {
+        --fg: var(--on-p);
+        --bg: var(--p2);
+      }
+      .c-p3 {
+        --fg: var(--on-p);
+        --bg: var(--p3);
+      }
+      .c-pri {
+        --fg: var(--primary);
+        --bg: var(--primary-light);
+      }
+      .ic {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: var(--bg, var(--primary-light));
+        color: var(--fg, var(--primary));
+        flex-shrink: 0;
+      }
+      .ic svg {
+        width: 18px;
+        height: 18px;
+      }
+      .bar {
+        display: flex;
+        height: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+        gap: 2px;
+        background: var(--border-strong);
+      }
+      .bar i {
+        display: block;
+        min-width: 3px;
+      }
+      .bar.lg {
+        height: 12px;
+        border-radius: 6px;
+      }
+      .b-done {
+        background: var(--bar-done);
+      }
+      .b-wait {
+        background: var(--bar-wait);
+      }
+      .b-ask {
+        background: var(--bar-ask);
+      }
+      .b-hold {
+        background: var(--bar-hold);
+      }
+      .big {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.1;
+        font-variant-numeric: tabular-nums;
+      }
+      .circ {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        color: var(--fg);
+        font-weight: 700;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .sh {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        flex-wrap: wrap;
+      }
+      .sh .r {
+        margin-left: auto;
+      }
+      .car {
+        color: var(--muted);
+        transition: rotate 0.15s;
+      }
+      :focus-visible,
+      summary:focus-visible {
+        outline: 2px solid var(--border-focus);
+        outline-offset: 2px;
+      }
 
-  <section>
-    <h2>Việc kỹ thuật cần chuẩn bị</h2>
-    <p class="h2-sub">
-      Phần dành cho đội kỹ thuật, tóm tắt để mọi người nắm được vì sao cần thời
-      gian chuẩn bị nền móng trước khi thấy tính năng đầu tiên.
-    </p>
-    <div class="tech-grid">
-      <div class="tech-card">
-        <h3>Cổng kết nối cho app</h3>
-        <p>
-          Website và app "nói chuyện" với hệ thống theo hai cách khác nhau — cần
-          xây thêm một lớp cổng kết nối cho app. Điểm tốt: phần lõi nghiệp vụ
-          được tái sử dụng nguyên vẹn, không phải viết lại. Đây là hạng mục
-          quyết định khối lượng của Giai đoạn 1.
-        </p>
-      </div>
-      <div class="tech-card">
-        <h3>Đăng nhập an toàn trên điện thoại</h3>
-        <p>
-          Cơ chế tài khoản hiện tại dùng lại được; cần bổ sung cách lưu phiên
-          đăng nhập an toàn trên máy để không phải đăng nhập lại liên tục.
-        </p>
-      </div>
-      <div class="tech-card">
-        <h3>Kênh thông báo mới</h3>
-        <p>
-          Hệ thống gửi thông báo đã được thiết kế sẵn để "cắm thêm" kênh mới —
-          thêm kênh thông báo cho điện thoại không phải đập đi làm lại.
-        </p>
-      </div>
-      <div class="tech-card">
-        <h3>Nhận diện khuôn mặt</h3>
-        <p>
-          Cần chọn một trong hai hướng: nhận diện ngay trên điện thoại (nhanh,
-          chạy được khi mạng yếu) hoặc gửi ảnh về máy chủ xử lý như web hiện tại
-          (đơn giản hơn để làm).
-        </p>
-      </div>
-      <div class="tech-card">
-        <h3>Phân quyền giữ nguyên</h3>
-        <p>
-          Ai thấy nút gì, xem được dữ liệu gì — dùng đúng bộ phân quyền của
-          website hiện tại, không tạo hệ phân quyền riêng cho app.
-        </p>
-      </div>
-      <div class="tech-card">
-        <h3>Chấm công khi mất mạng</h3>
-        <p>
-          Ở xưởng / cầu tàu sóng có thể yếu: app cần ghi nhận lần chấm công tạm
-          trên máy rồi tự gửi lên khi có mạng lại. Cần quyết sớm vì ảnh hưởng
-          cách xây tính năng chấm công.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Phân vai Website ↔ App</h2>
-    <div class="scope-cols">
-      <div class="scope-box keep">
-        <h3>Ở lại Website (quản trị)</h3>
-        <ul>
-          <li>
-            Quản lý danh mục: nhân viên, phân quyền, khu vực – đơn vị, dịch vụ,
-            sản phẩm, ca làm việc
-          </li>
-          <li>
-            Kế hoạch sản xuất: tạo lệnh, phân công, điều chuyển, sắp xếp nhân sự
-          </li>
-          <li>Kho dụng cụ: nhập / xuất / kiểm kê</li>
-          <li>Báo cáo tổng hợp, xuất Excel, nhật ký hệ thống</li>
-          <li>Cấu hình hệ thống, gửi thông báo hàng loạt</li>
-        </ul>
-      </div>
-      <div class="scope-box out">
-        <h3>Không làm (cả hai nơi)</h3>
-        <ul>
-          <li>
-            Tính lương trên app — lương thuộc phạm vi website (bộ phận Tài
-            chính)
-          </li>
-          <li>
-            Bê nguyên 100% website lên app — app là công cụ của nhân viên, không
-            phải bản thu nhỏ của website
-          </li>
-          <li>
-            Dùng app hoàn toàn không cần mạng — chỉ riêng chấm công có cơ chế
-            lưu tạm khi mất sóng
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <div class="qnote">
-    <strong>Cần chốt trong meeting:</strong> ① Cách phát hành trên iPhone — app
-    "ẩn" (nhân viên dùng máy cá nhân), phát hành riêng cho doanh nghiệp (máy
-    công ty cấp), hay công khai trên App Store (chấp nhận xây thêm đăng ký / xoá
-    tài khoản...); ② Hướng xây cổng kết nối cho app — quyết định lớn nhất về
-    khối lượng công việc; ③ Nhận diện khuôn mặt trên điện thoại hay trên máy chủ
-    + quy trình xin đồng ý và xoá dữ liệu khuôn mặt; ④ Giai đoạn 3 (kiểm tra nội
-    bộ, mượn trả dụng cụ) có đúng nhu cầu tổ trưởng không.
-  </div>
-
-  <footer>
-    Draft nội bộ để thảo luận · Tổng hợp từ tài liệu yêu cầu của hệ thống
-    (.specs) · Chi tiết mã tính năng tham chiếu (F-xxx) có trong bản kỹ
-    thuật.<br />
-    <a href="phieu-nghiem-thu-gal.html" style="color: var(--accent-ink)"
-      >→ Phiếu nghiệm thu (GAL - 02KT)</a
-    >
-    <a href="bien-ban-nghiem-thu-gal.html" style="color: var(--accent-ink)"
-      >→ Biên bản nghiệm thu (GAL - 02KT)</a
-    >
-  </footer>
-</div>
+      .strip {
+        padding: 16px 20px;
+        display: grid;
+        gap: 16px;
+      }
+      .note {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: var(--hover);
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+      .note .ic {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+      }
+      .note .ic svg {
+        width: 14px;
+        height: 14px;
+      }
+      .note b {
+        color: var(--foreground);
+        font-weight: 600;
+      }
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .lg1 {
+        display: grid;
+        gap: 2px;
+      }
+      .lg1 .l {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+      }
+      .lg1 .big {
+        color: var(--fg);
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--dot);
+        flex-shrink: 0;
+      }
+      .drow {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr) auto 84px;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 20px;
+        border-top: 1px solid var(--border);
+      }
+      .drow b {
+        font-weight: 600;
+      }
+      .drow .q {
+        color: var(--muted);
+        font-size: 13px;
+        text-wrap: pretty;
+      }
+      .donebox {
+        margin: 4px 20px 16px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: var(--s-done-bg);
+        font-size: 13px;
+      }
+      .donebox summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--s-done);
+      }
+      .donebox ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        columns: 2;
+        column-gap: 24px;
+        list-style: disc;
+      }
+      .donebox li {
+        break-inside: avoid;
+        margin-bottom: 2px;
+      }
+      .donebox.hold {
+        background: var(--s-hold-bg);
+      }
+      .donebox.hold summary {
+        color: var(--s-hold);
+      }
+      .donebox.hold ul {
+        columns: 1;
+      }
+      .items .donebox {
+        margin: 8px 0 0;
+      }
+      .tabin {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .panel {
+        display: none;
+      }
+      #t-khsx:checked ~ .sect-h label[for="t-khsx"] {
+        background: var(--surface);
+        color: var(--foreground);
+        font-weight: 600;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0/0.05),
+          0 1px 2px rgb(0 0 0/0.06);
+      }
+      #t-khsx:checked ~ .panels #p-khsx {
+        display: block;
+      }
+      #t-khsx:focus-visible ~ .sect-h label[for="t-khsx"] {
+        outline: 2px solid var(--border-focus);
+        outline-offset: 2px;
+      }
+      #t-hcns:checked ~ .sect-h label[for="t-hcns"] {
+        background: var(--surface);
+        color: var(--foreground);
+        font-weight: 600;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0/0.05),
+          0 1px 2px rgb(0 0 0/0.06);
+      }
+      #t-hcns:checked ~ .panels #p-hcns {
+        display: block;
+      }
+      #t-hcns:focus-visible ~ .sect-h label[for="t-hcns"] {
+        outline: 2px solid var(--border-focus);
+        outline-offset: 2px;
+      }
+      #t-mobile:checked ~ .sect-h label[for="t-mobile"] {
+        background: var(--surface);
+        color: var(--foreground);
+        font-weight: 600;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0/0.05),
+          0 1px 2px rgb(0 0 0/0.06);
+      }
+      #t-mobile:checked ~ .panels #p-mobile {
+        display: block;
+      }
+      #t-mobile:focus-visible ~ .sect-h label[for="t-mobile"] {
+        outline: 2px solid var(--border-focus);
+        outline-offset: 2px;
+      }
+      #t-ext:checked ~ .sect-h label[for="t-ext"] {
+        background: var(--surface);
+        color: var(--foreground);
+        font-weight: 600;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0/0.05),
+          0 1px 2px rgb(0 0 0/0.06);
+      }
+      #t-ext:checked ~ .panels #p-ext {
+        display: block;
+      }
+      #t-ext:focus-visible ~ .sect-h label[for="t-ext"] {
+        outline: 2px solid var(--border-focus);
+        outline-offset: 2px;
+      }
+      .cols,
+      .pack > summary {
+        display: grid;
+        grid-template-columns:
+          minmax(0, 1.6fr) minmax(100px, 1fr)
+          80px 80px 20px;
+        gap: 16px;
+        align-items: center;
+        padding: 12px 20px;
+      }
+      .cols {
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 8px 20px;
+      }
+      .pack {
+        border-top: 1px solid var(--border);
+      }
+      .pack > summary {
+        cursor: pointer;
+        list-style: none;
+      }
+      .pack > summary::-webkit-details-marker {
+        display: none;
+      }
+      .pack > summary:hover,
+      .pack[open] > summary {
+        background: var(--hover);
+      }
+      .pack[open] .car {
+        rotate: 180deg;
+      }
+      .nm {
+        font-weight: 600;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+      .items {
+        padding: 4px 20px 12px;
+        display: flex;
+        flex-direction: column;
+      }
+      .it {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr) 120px 110px 80px;
+        gap: 12px;
+        padding: 10px 0;
+        border-top: 1px solid var(--border);
+        align-items: start;
+      }
+      .it:first-child {
+        border-top: 0;
+      }
+      .nmx {
+        font-weight: 600;
+      }
+      .mono {
+        font-variant-numeric: tabular-nums;
+        font-size: 12.5px;
+      }
+      .ask {
+        display: block;
+        margin-top: 6px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: var(--s-ask-bg);
+        font-size: 12.5px;
+      }
+      .ask b {
+        color: var(--s-ask);
+      }
+      .it.ext {
+        grid-template-columns: minmax(0, 1fr) 110px 150px minmax(0, 1.2fr);
+      }
+      .ext-d {
+        color: var(--muted);
+      }
+      .foot {
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+      .pad-x {
+        padding: 12px 20px 16px;
+      }
+      .app summary {
+        cursor: pointer;
+        color: var(--muted);
+        padding: 14px 20px;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .app summary::-webkit-details-marker {
+        display: none;
+      }
+      .appbody {
+        padding: 0 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 80ch;
+      }
+      .appbody ul {
+        margin: 0;
+        padding-left: 18px;
+        list-style: disc;
+      }
+      @media (max-width: 900px) {
+        .legend {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 720px) {
+        .page {
+          padding: 16px;
+        }
+        .sh .r {
+          display: none;
+        }
+        .hd .sp {
+          margin-left: 0;
+          width: 100%;
+        }
+        .hd h1 {
+          font-size: 18px;
+        }
+        .drow {
+          grid-template-columns: 28px minmax(0, 1fr);
+        }
+        .drow > .chip,
+        .drow > .num {
+          grid-column: 2;
+          justify-self: start;
+        }
+        .pack > summary {
+          grid-template-columns: minmax(0, 1fr) auto 20px;
+        }
+        .pack > summary .vbar,
+        .pack > summary .c4,
+        .cols {
+          display: none;
+        }
+        .it,
+        .it.ext {
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+        .it .l0 {
+          display: none;
+        }
+        .it .l3,
+        .it .l4,
+        .it.ext > *:nth-child(n + 2) {
+          grid-column: 1/-1;
+        }
+        .it .l3,
+        .it .l4 {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+        .donebox ul {
+          columns: 1;
+        }
+        .seg {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+      }
+      @media print {
+        .panel {
+          display: block !important;
+        }
+        .seg {
+          display: none;
+        }
+        details > * {
+          display: revert;
+        }
+      }
+    </style>
+    <script>
+      (function () {
+        var d = document.documentElement,
+          t;
+        try {
+          t = localStorage.getItem("gal-theme");
+        } catch (e) {}
+        if (t !== "light" && t !== "dark")
+          t = matchMedia("(prefers-color-scheme:dark)").matches
+            ? "dark"
+            : "light";
+        d.dataset.theme = t;
+        addEventListener("DOMContentLoaded", function () {
+          var b = document.getElementById("theme");
+          b.setAttribute("aria-pressed", t === "dark");
+          b.onclick = function () {
+            t = d.dataset.theme === "dark" ? "light" : "dark";
+            d.dataset.theme = t;
+            b.setAttribute("aria-pressed", t === "dark");
+            try {
+              localStorage.setItem("gal-theme", t);
+            } catch (e) {}
+          };
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol
+          id="i-check"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m9 12 2 2 4-4" />
+        </symbol>
+        <symbol
+          id="i-clock"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
+        </symbol>
+        <symbol
+          id="i-help"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01" />
+        </symbol>
+        <symbol
+          id="i-pause"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M10 15V9M14 15V9" />
+        </symbol>
+        <symbol
+          id="i-down"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </symbol>
+        <symbol
+          id="i-camera"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+          />
+          <circle cx="12" cy="13" r="3" />
+        </symbol>
+        <symbol
+          id="i-bell"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+        </symbol>
+        <symbol
+          id="i-pin"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </symbol>
+        <symbol
+          id="i-phone"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect width="14" height="20" x="5" y="2" rx="2" />
+          <path d="M12 18h.01" />
+        </symbol>
+        <symbol
+          id="i-eyeoff"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+          <path
+            d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"
+          />
+          <path
+            d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"
+          />
+          <path d="M2 2l20 20" />
+        </symbol>
+        <symbol
+          id="i-build"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect width="16" height="20" x="4" y="2" rx="2" />
+          <path
+            d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"
+          />
+        </symbol>
+        <symbol
+          id="i-globe"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20" />
+        </symbol>
+        <symbol
+          id="i-usd"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </symbol>
+        <symbol
+          id="i-list"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+        </symbol>
+        <symbol
+          id="i-moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </symbol>
+        <symbol
+          id="i-sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+          />
+        </symbol>
+        <symbol
+          id="i-flag"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"
+          />
+        </symbol>
+        <symbol
+          id="i-x"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m15 9-6 6M9 9l6 6" />
+        </symbol>
+      </defs>
+    </svg>
+    <main class="page">
+      <header class="hd">
+        <img src="gal-logo.webp" alt="GAL" width="72" height="28" />
+        <h1>Scope · Chốt phí</h1>
+        <span class="pill">06/10/2026</span
+        ><span class="pill">76 hạng mục · 3 nhóm</span>
+        <div class="sp">
+          <nav class="seg" aria-label="Trang">
+            <a href="index.html" aria-current="page">Scope</a
+            ><a href="roadmap.html">Roadmap</a>
+          </nav>
+          <button
+            type="button"
+            class="tb"
+            id="theme"
+            aria-label="Chuyển giao diện sáng / tối"
+          >
+            <span class="th-moon"
+              ><svg aria-hidden="true"><use href="#i-moon" /></svg></span
+            ><span class="th-sun"
+              ><svg aria-hidden="true"><use href="#i-sun" /></svg
+            ></span>
+          </button>
+        </div>
+      </header>
+      <section class="card strip">
+        <div
+          class="bar lg"
+          role="img"
+          aria-label="63 xong, 2 đang dở, 2 chờ GAL, 9 hoãn"
+        >
+          <i class="b-done" style="flex: 63"></i
+          ><i class="b-wait" style="flex: 2"></i
+          ><i class="b-ask" style="flex: 2"></i
+          ><i class="b-hold" style="flex: 9"></i>
+        </div>
+        <div class="legend">
+          <div class="lg1" style="--fg: var(--s-done); --dot: var(--bar-done)">
+            <span class="l"><i class="dot"></i>Đã xong</span
+            ><span class="big">63</span
+            ><span class="muted sm">≈95 man-day</span>
+          </div>
+          <div class="lg1" style="--fg: var(--s-wait); --dot: var(--bar-wait)">
+            <span class="l"><i class="dot"></i>Đang dở</span
+            ><span class="big">2</span><span class="muted sm">≈18 man-day</span>
+          </div>
+          <div class="lg1" style="--fg: var(--s-ask); --dot: var(--bar-ask)">
+            <span class="l"><i class="dot"></i>Chờ GAL chốt</span
+            ><span class="big">2</span><span class="muted sm">≈5 man-day</span>
+          </div>
+          <div class="lg1" style="--fg: var(--s-hold); --dot: var(--bar-hold)">
+            <span class="l"><i class="dot"></i>Hoãn GĐ2</span
+            ><span class="big">9</span><span class="muted sm">≈62 man-day</span>
+          </div>
+        </div>
+      </section>
+      <section class="card" id="can-chot">
+        <div class="sh">
+          <span class="ic t-ask"
+            ><svg aria-hidden="true"><use href="#i-help" /></svg
+          ></span>
+          <h2>Cần GAL chốt</h2>
+          <span class="chip c-ask">4 điểm</span
+          ><span class="muted sm r">+ 9 hạng mục hoãn GĐ2</span>
+        </div>
+        <div class="drow">
+          <span class="circ t-wait">1</span>
+          <div>
+            <b>OCR tài liệu và dashboard tổng quan nhân sự</b>
+            <span class="muted mono">· HCNS 78</span>
+            <p class="q">Thống nhất mốc hoàn thành. Excel ghi hạn 15/09.</p>
+          </div>
+          <span class="chip c-wait">Đang làm</span
+          ><span class="num"
+            ><b>15</b> <span class="muted sm">man-day</span></span
+          >
+        </div>
+        <div class="drow">
+          <span class="circ t-wait">2</span>
+          <div>
+            <b>Xác nhận phân công</b>
+            <span class="muted mono">· Mobile GĐ2</span>
+            <p class="q">
+              Phản hồi qua thông báo có đủ không, hay cần cả ở màn Công việc,
+              kèm lý do từ chối như web.
+            </p>
+          </div>
+          <span class="chip c-wait">Làm một phần</span
+          ><span class="num"
+            ><b>3</b> <span class="muted sm">man-day</span></span
+          >
+        </div>
+        <div class="drow">
+          <span class="circ t-ask">3</span>
+          <div>
+            <b>Phát hành iPhone / Android lên store</b>
+            <span class="muted mono">· Mobile Roadmap mục A</span>
+            <p class="q">
+              Chốt cách phát hành iPhone. Đăng ký Apple Developer (99 USD/năm,
+              cần D-U-N-S 1–2 tuần) và Google Play (25 USD) dưới tên công ty.
+            </p>
+          </div>
+          <span class="chip c-ask">Chờ GAL chốt</span
+          ><span class="num"
+            ><b>2</b> <span class="muted sm">man-day</span></span
+          >
+        </div>
+        <div class="drow">
+          <span class="circ t-ask">4</span>
+          <div>
+            <b>Tuân thủ khi duyệt store</b>
+            <span class="muted mono">· Mobile Roadmap mục B</span>
+            <p class="q">
+              GAL chốt quy trình đồng ý và xoá dữ liệu khuôn mặt, cung cấp môi
+              trường test truy cập được từ nước ngoài cho người duyệt.
+            </p>
+          </div>
+          <span class="chip c-ask">Chờ GAL chốt</span
+          ><span class="num"
+            ><b>3</b> <span class="muted sm">man-day</span></span
+          >
+        </div>
+        <details class="donebox hold">
+          <summary>
+            Xác nhận hoãn giai đoạn 2 (9 hạng mục, báo giá riêng)
+          </summary>
+          <ul>
+            <li>
+              Khảo sát chi phí app gửi mail cho VAECO
+              <span class="muted mono">· KHSX 47</span>
+            </li>
+            <li>
+              Tách định mức thành “định mức theo ngày” và “số ngày làm”
+              <span class="muted mono">· KHSX 53 · ≈3 man-day</span>
+            </li>
+            <li>
+              AI tính định mức thời gian và tool từ ảnh trước/sau
+              <span class="muted mono">· KHSX 24 · ≈15 man-day</span>
+            </li>
+            <li>
+              Một ngày làm 3 ca (6h30–16h30, 15h–24h, 22h–07h)
+              <span class="muted mono">· KHSX 81 · ≈10 man-day</span>
+            </li>
+            <li>
+              Checklist công việc + chụp ảnh
+              <span class="muted mono">· Mobile GĐ3 · ≈8 man-day</span>
+            </li>
+            <li>
+              Kiểm tra nội bộ: chấm điểm và chụp ảnh
+              <span class="muted mono">· Mobile GĐ3 · ≈8 man-day</span>
+            </li>
+            <li>
+              Mượn / trả dụng cụ
+              <span class="muted mono">· Mobile GĐ3 · ≈6 man-day</span>
+            </li>
+            <li>
+              Duyệt nhanh cho quản lý
+              <span class="muted mono">· Mobile GĐ3 · ≈4 man-day</span>
+            </li>
+            <li>
+              Chấm công khi mất mạng (offline)
+              <span class="muted mono"
+                >· Mobile Roadmap mục kỹ thuật · ≈8 man-day</span
+              >
+            </li>
+          </ul>
+        </details>
+      </section>
+      <section class="card" id="goi">
+        <input
+          type="radio"
+          name="nhom"
+          id="t-khsx"
+          class="tabin"
+          checked
+        /><input type="radio" name="nhom" id="t-hcns" class="tabin" /><input
+          type="radio"
+          name="nhom"
+          id="t-mobile"
+          class="tabin"
+        /><input type="radio" name="nhom" id="t-ext" class="tabin" />
+        <div class="sh sect-h">
+          <h2>Gói việc</h2>
+          <div class="seg r">
+            <label for="t-khsx">KHSX</label><label for="t-hcns">HCNS</label
+            ><label for="t-mobile">Mobile</label
+            ><label for="t-ext">Ngoài Excel</label>
+          </div>
+        </div>
+        <div class="panels">
+          <div class="panel" id="p-khsx">
+            <div class="cols">
+              <span>Gói việc</span><span>Trạng thái</span
+              ><span class="num">Đã làm</span><span class="num">Còn lại</span
+              ><span></span>
+            </div>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Check list nghiệm thu nội bộ &amp; ảnh phạm vi
+                  </div>
+                  <div class="sub">5 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="5 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 5"
+                      title="Đã xong · tính phí: 5"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈6</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>5 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Chụp ảnh trước / sau khi làm
+                      <span class="muted mono">3, 4, 27</span>
+                    </li>
+                    <li>
+                      Chặn xem phóng to / tải / export ảnh
+                      <span class="muted mono">28</span>
+                    </li>
+                    <li>
+                      Fail / Pass nội bộ <span class="muted mono">5, 6</span>
+                    </li>
+                    <li>
+                      Highlight KHSX đã báo cáo check list
+                      <span class="muted mono">14</span>
+                    </li>
+                    <li>
+                      Highlight trạng thái check in/out khi add nhân sự
+                      <span class="muted mono">15</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Ký điện tử &amp; phiếu nghiệm thu VAECO</div>
+                  <div class="sub">7 hạng mục · 1 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="7 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 6"
+                      title="Đã xong · tính phí: 6"
+                    ></i
+                    ><i
+                      class="b-hold"
+                      style="flex: 1"
+                      title="Hoãn giai đoạn 2: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈11</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">47</span>
+                  <div>
+                    <span class="nmx"
+                      >Khảo sát chi phí app gửi mail cho VAECO</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Làm ở giai đoạn 2, tính riêng.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4"></span>
+                </div>
+                <details class="donebox">
+                  <summary>6 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Nghiệm thu khách hàng: Phiếu CCDV, Biên bản PDF, ký điện
+                      tử <span class="muted mono">7, 8, 9</span>
+                    </li>
+                    <li>
+                      Lọc phiếu theo khoảng ngày và khu vực
+                      <span class="muted mono">54</span>
+                    </li>
+                    <li>
+                      Giờ ký thực tế và cột loại dịch vụ trên phiếu
+                      <span class="muted mono">64, 67</span>
+                    </li>
+                    <li>
+                      Tách phiếu theo tàu / nhóm dịch vụ, ký nối tiếp
+                      <span class="muted mono">71, 73, 58</span>
+                    </li>
+                    <li>
+                      Ký điện tử trực tiếp (face to face) GAL – VAECO
+                      <span class="muted mono">56</span>
+                    </li>
+                    <li>
+                      Export các phạm vi đã ký điện tử, lọc theo loại dịch vụ
+                      <span class="muted mono">57</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack" open>
+              <summary>
+                <div>
+                  <div class="nm">Định mức &amp; giờ công dịch vụ</div>
+                  <div class="sub">6 hạng mục · 2 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="6 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 4"
+                      title="Đã xong · tính phí: 4"
+                    ></i
+                    ><i
+                      class="b-hold"
+                      style="flex: 2"
+                      title="Hoãn giai đoạn 2: 2"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈7</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>≈18,5</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">53</span>
+                  <div>
+                    <span class="nmx"
+                      >Tách định mức thành “định mức theo ngày” và “số ngày
+                      làm”</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> GAL từ chối/chưa đồng ý. Cần làm rõ yêu
+                      cầu và ví dụ số, đẩy sang giai đoạn 2, báo giá
+                      riêng.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">3 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">24</span>
+                  <div>
+                    <span class="nmx"
+                      >AI tính định mức thời gian và tool từ ảnh trước/sau</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Đề xuất làm giai đoạn 2, báo giá
+                      riêng.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">15 man-day</span>
+                </div>
+                <details class="donebox">
+                  <summary>4 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Định mức tối đa, giới hạn người, chia đều
+                      <span class="muted mono">13, 33</span>
+                    </li>
+                    <li>
+                      Buffer khi vượt định mức (case 112h / 14 người)
+                      <span class="muted mono">72</span>
+                    </li>
+                    <li>
+                      Chặn khung 7:30–17:00, chỉ tính giờ thực tế khi thêm nhân
+                      sự <span class="muted mono">76, 82</span>
+                    </li>
+                    <li>
+                      Định mức RKTB riêng cho đầu HAN và SGN
+                      <span class="muted mono">16</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Chấm công trong KHSX (giờ vào/ra, duyệt công, OT)
+                  </div>
+                  <div class="sub">9 hạng mục · 1 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="9 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 8"
+                      title="Đã xong · tính phí: 8"
+                    ></i
+                    ><i
+                      class="b-hold"
+                      style="flex: 1"
+                      title="Hoãn giai đoạn 2: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈8</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>≈10</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">81</span>
+                  <div>
+                    <span class="nmx"
+                      >Một ngày làm 3 ca (6h30–16h30, 15h–24h, 22h–07h)</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Chốt khi nào mở lại.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">10 man-day</span>
+                </div>
+                <details class="donebox">
+                  <summary>8 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Giới hạn thời gian check in/out đến 23:59 ngày cuối KHSX
+                      <span class="muted mono">17</span>
+                    </li>
+                    <li>
+                      Duyệt công và luân chuyển trong cùng ngày
+                      <span class="muted mono">34, 36, 31</span>
+                    </li>
+                    <li>
+                      Camera chấm công bị phóng to
+                      <span class="muted mono">35</span>
+                    </li>
+                    <li>
+                      OT: hiển thị giờ OT, cấu hình theo từng ngày
+                      <span class="muted mono">37, 44, 45</span>
+                    </li>
+                    <li>
+                      Quản lý thời gian OT: bắt buộc lý do, vượt định mức gửi
+                      duyệt <span class="muted mono">80</span>
+                    </li>
+                    <li>
+                      Lỗi chấm công vắt ngày <span class="muted mono">63</span>
+                    </li>
+                    <li>
+                      Bug báo từ 11/08 đến 31/08
+                      <span class="muted mono">70</span>
+                    </li>
+                    <li>
+                      Duyệt công khi chưa check in/out đủ
+                      <span class="muted mono">42</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Điều chuyển &amp; export nhân sự KHSX</div>
+                  <div class="sub">4 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="4 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 4"
+                      title="Đã xong · tính phí: 4"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈9</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>4 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Điều chuyển nhân sự và tra cứu lịch sử
+                      <span class="muted mono">19, 20</span>
+                    </li>
+                    <li>
+                      Thể hiện người thêm nhân sự
+                      <span class="muted mono">30</span>
+                    </li>
+                    <li>
+                      Export theo ngày công, cột Tổng giờ, cột Leader
+                      <span class="muted mono">29, 40, 65</span>
+                    </li>
+                    <li>
+                      Lưu trình sửa: ai sửa, sửa gì, khi nào
+                      <span class="muted mono">32</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Sắp xếp thông minh, thông báo, xác nhận đi làm
+                  </div>
+                  <div class="sub">5 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="5 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 5"
+                      title="Đã xong · tính phí: 5"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈12</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>5 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Sắp xếp nhân sự tự động <span class="muted mono">21</span>
+                    </li>
+                    <li>
+                      Thông báo và xác nhận/từ chối đi làm
+                      <span class="muted mono">22, 23</span>
+                    </li>
+                    <li>
+                      Hạn xác nhận / từ chối KHSX: khung giờ cố định 19–20h
+                      <span class="muted mono">46</span>
+                    </li>
+                    <li>
+                      Tách thông báo giữa HAN và SGN
+                      <span class="muted mono">48, 51</span>
+                    </li>
+                    <li>
+                      App cho nhân sự sản xuất
+                      <span class="muted mono">43</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Quản lý KHSX</div>
+                  <div class="sub">5 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="5 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 5"
+                      title="Đã xong · tính phí: 5"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈6</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>5 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Khóa thao tác khi KHSX đã hoàn thành
+                      <span class="muted mono">11, 12</span>
+                    </li>
+                    <li>
+                      Tab Đã hoàn thành và tab Đã hủy
+                      <span class="muted mono">25</span>
+                    </li>
+                    <li>
+                      Lọc nhân sự theo khu vực, cross khu vực
+                      <span class="muted mono">41</span>
+                    </li>
+                    <li>
+                      Ghim tiêu đề bảng toàn portal
+                      <span class="muted mono">49</span>
+                    </li>
+                    <li>
+                      Nhân sự đi làm: kiểm tra timezone và responsive mobile
+                      <span class="muted mono">69</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Công cụ dụng cụ (CCDC) &amp; Kho</div>
+                  <div class="sub">1 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="1 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 1"
+                      title="Đã xong · tính phí: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈10</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>1 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Quản lý CCDC theo từng món, giao theo KHSX, thu hồi
+                      <span class="muted mono">2, 10, 61, 74</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Kế toán, Dashboard &amp; danh sách An ninh
+                  </div>
+                  <div class="sub">3 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="3 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 3"
+                      title="Đã xong · tính phí: 3"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈6</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>3 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Kế toán theo dõi phiếu nghiệm thu, đơn giá sản phẩm
+                      <span class="muted mono">50, 66</span>
+                    </li>
+                    <li>
+                      Dashboard giờ công và định mức theo khu vực
+                      <span class="muted mono">62</span>
+                    </li>
+                    <li>
+                      Xuất danh sách nhân sự đi làm cho An ninh
+                      <span class="muted mono">60</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+          </div>
+          <div class="panel" id="p-hcns">
+            <div class="cols">
+              <span>Gói việc</span><span>Trạng thái</span
+              ><span class="num">Đã làm</span><span class="num">Còn lại</span
+              ><span></span>
+            </div>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Hồ sơ nhân sự (F-071)</div>
+                  <div class="sub">2 hạng mục · 1 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="2 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 1"
+                      title="Đã xong · tính phí: 1"
+                    ></i
+                    ><i
+                      class="b-wait"
+                      style="flex: 1"
+                      title="Chờ xác nhận / đang dở: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈6</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>≈15</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">78</span>
+                  <div>
+                    <span class="nmx"
+                      >OCR tài liệu và dashboard tổng quan nhân sự</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Thống nhất mốc hoàn thành. Excel ghi hạn
+                      15/09.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-wait">Đang làm</span></span
+                  ><span class="mono l3 nw">Đang thực hiện</span
+                  ><span class="num mono l4">15 man-day</span>
+                </div>
+                <details class="donebox">
+                  <summary>1 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Nền tảng hồ sơ nhân sự <span class="muted mono">77</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Role thỏa thuận (F-064, F-065)</div>
+                  <div class="sub">1 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="1 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 1"
+                      title="Đã xong · tính phí: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈4</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>1 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Giờ công và đơn giá riêng theo thỏa thuận
+                      <span class="muted mono">79</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Tổng quan nhân sự làm việc</div>
+                  <div class="sub">1 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="1 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 1"
+                      title="Đã xong · tính phí: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈3</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>1 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Màn theo dõi nhân sự theo ngày
+                      <span class="muted mono">75</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Thẻ an ninh &amp; sinh nhật</div>
+                  <div class="sub">2 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="2 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 2"
+                      title="Đã xong · tính phí: 2"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈3</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>2 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Quản lý thẻ an ninh, cảnh báo sắp hết hạn
+                      <span class="muted mono">59</span>
+                    </li>
+                    <li>
+                      Nhân sự có sinh nhật trong tháng
+                      <span class="muted mono">55</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Chấm công &amp; báo cáo công</div>
+                  <div class="sub">4 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="4 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 4"
+                      title="Đã xong · tính phí: 4"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>≈4</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>4 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Cột địa điểm làm việc khi chấm công
+                      <span class="muted mono">26</span>
+                    </li>
+                    <li>
+                      Yêu cầu quên chấm công <span class="muted mono">38</span>
+                    </li>
+                    <li>
+                      Nhân viên xem báo cáo công của mình
+                      <span class="muted mono">39, 52</span>
+                    </li>
+                    <li>
+                      Bảng công: lọc theo Loại nhân viên
+                      <span class="muted mono">68</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+          </div>
+          <div class="panel" id="p-mobile">
+            <p class="foot pad-x">
+              GAL-Mobile: 39 ngày có commit (06/07 – 02/10/2026), chưa chia theo
+              gói và chưa cộng vào tổng “đã xong”, vì có thể trùng ngày làm web.
+            </p>
+            <div class="cols">
+              <span>Gói việc</span><span>Trạng thái</span
+              ><span class="num">Đã làm</span><span class="num">Còn lại</span
+              ><span></span>
+            </div>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Giai đoạn 1 · Nhân sự sản xuất (Bắt buộc)
+                  </div>
+                  <div class="sub">7 hạng mục · đã xong hết</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="7 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 7"
+                      title="Đã xong · tính phí: 7"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>—</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <details class="donebox">
+                  <summary>7 hạng mục đã xong</summary>
+                  <ul>
+                    <li>Đăng nhập <span class="muted mono">GĐ1</span></li>
+                    <li>
+                      Chấm công sản xuất (camera + khuôn mặt)
+                      <span class="muted mono">GĐ1</span>
+                    </li>
+                    <li>
+                      Lịch sử chấm công của tôi
+                      <span class="muted mono">GĐ1</span>
+                    </li>
+                    <li>Thông báo đẩy <span class="muted mono">GĐ1</span></li>
+                    <li>
+                      Đăng ký tài khoản trong app
+                      <span class="muted mono">GĐ1</span>
+                    </li>
+                    <li>
+                      Tự xoá tài khoản trong app
+                      <span class="muted mono">GĐ1</span>
+                    </li>
+                    <li>
+                      Trang chính sách riêng tư và hỗ trợ
+                      <span class="muted mono">GĐ1</span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Giai đoạn 2 · Nhân viên văn phòng (Bắt buộc)
+                  </div>
+                  <div class="sub">7 hạng mục · 1 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="7 hạng mục">
+                    <i
+                      class="b-done"
+                      style="flex: 6"
+                      title="Đã xong · tính phí: 6"
+                    ></i
+                    ><i
+                      class="b-wait"
+                      style="flex: 1"
+                      title="Chờ xác nhận / đang dở: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>—</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>≈3</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">GĐ2</span>
+                  <div>
+                    <span class="nmx">Xác nhận phân công</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Phản hồi qua thông báo có đủ không, hay
+                      cần cả ở màn Công việc, kèm lý do từ chối như web.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-wait">Làm một phần</span></span
+                  ><span class="mono l3 nw">08/2026</span
+                  ><span class="num mono l4">3 man-day</span>
+                </div>
+                <details class="donebox">
+                  <summary>6 hạng mục đã xong</summary>
+                  <ul>
+                    <li>
+                      Chấm công văn phòng (GPS)
+                      <span class="muted mono">GĐ2</span>
+                    </li>
+                    <li>
+                      Bảng công tháng của tôi
+                      <span class="muted mono">GĐ2</span>
+                    </li>
+                    <li>
+                      Công việc của tôi <span class="muted mono">GĐ2</span>
+                    </li>
+                    <li>
+                      Đơn quên chấm công <span class="muted mono">GĐ2</span>
+                    </li>
+                    <li>Hộp thông báo <span class="muted mono">GĐ2</span></li>
+                    <li>Hồ sơ cá nhân <span class="muted mono">GĐ2</span></li>
+                  </ul>
+                </details>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">
+                    Giai đoạn 3 · Tổ trưởng và hiện trường (Ưu tiên thấp)
+                  </div>
+                  <div class="sub">4 hạng mục · 4 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="4 hạng mục">
+                    <i
+                      class="b-hold"
+                      style="flex: 4"
+                      title="Hoãn giai đoạn 2: 4"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>—</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>≈26</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">GĐ3</span>
+                  <div>
+                    <span class="nmx">Checklist công việc + chụp ảnh</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Roadmap ghi chỉ xét sau khi GĐ1–2 ổn
+                      định, không cam kết phạm vi đầu. GAL xác nhận có làm
+                      không.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">8 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">GĐ3</span>
+                  <div>
+                    <span class="nmx"
+                      >Kiểm tra nội bộ: chấm điểm và chụp ảnh</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Như trên. Chung nguồn dữ liệu với KHSX
+                      dòng 5, 6.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">8 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">GĐ3</span>
+                  <div>
+                    <span class="nmx">Mượn / trả dụng cụ</span
+                    ><span class="ask"><b>Cần GAL:</b> Như trên.</span>
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">6 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">GĐ3</span>
+                  <div>
+                    <span class="nmx">Duyệt nhanh cho quản lý</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> GAL nêu cần duyệt nhanh những gì (duyệt
+                      công, OT…).</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">4 man-day</span>
+                </div>
+              </div>
+            </details>
+            <details class="pack">
+              <summary>
+                <div>
+                  <div class="nm">Phát hành lên store và tuân thủ</div>
+                  <div class="sub">3 hạng mục · 3 chưa xong</div>
+                </div>
+                <div class="vbar">
+                  <div class="bar" role="img" aria-label="3 hạng mục">
+                    <i
+                      class="b-ask"
+                      style="flex: 2"
+                      title="Chờ GAL chốt phạm vi: 2"
+                    ></i
+                    ><i
+                      class="b-hold"
+                      style="flex: 1"
+                      title="Hoãn giai đoạn 2: 1"
+                    ></i>
+                  </div>
+                </div>
+                <div class="num c3">
+                  <b>—</b>
+                  <div class="sub">đã làm</div>
+                </div>
+                <div class="num c4"><b>—</b></div>
+                <svg class="car" aria-hidden="true"><use href="#i-down" /></svg>
+              </summary>
+              <div class="items">
+                <div class="it">
+                  <span class="mono l0">Roadmap mục A</span>
+                  <div>
+                    <span class="nmx">Phát hành iPhone / Android lên store</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> Chốt cách phát hành iPhone. Đăng ký Apple
+                      Developer (99 USD/năm, cần D-U-N-S 1–2 tuần) và Google
+                      Play (25 USD) dưới tên công ty.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-ask">Chờ GAL chốt</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">2 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">Roadmap mục B</span>
+                  <div>
+                    <span class="nmx">Tuân thủ khi duyệt store</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> GAL chốt quy trình đồng ý và xoá dữ liệu
+                      khuôn mặt, cung cấp môi trường test truy cập được từ nước
+                      ngoài cho người duyệt.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-ask">Chờ GAL chốt</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">3 man-day</span>
+                </div>
+                <div class="it">
+                  <span class="mono l0">Roadmap mục kỹ thuật</span>
+                  <div>
+                    <span class="nmx">Chấm công khi mất mạng (offline)</span
+                    ><span class="ask"
+                      ><b>Cần GAL:</b> GAL xác nhận chấp nhận chấm công cần có
+                      mạng ở giai đoạn này.</span
+                    >
+                  </div>
+                  <span class="l3"
+                    ><span class="chip c-hold">Hoãn GĐ2</span></span
+                  ><span class="mono l3 nw">—</span
+                  ><span class="num mono l4">8 man-day</span>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="panel" id="p-ext">
+            <div class="items">
+              <div class="it ext">
+                <div><span class="nmx">Nền tảng ban đầu</span></div>
+                <span><span class="chip c-hold">Chung</span></span
+                ><span class="mono nw">12/2025 – 04/2026</span
+                ><span class="mono ext-d"
+                  >≈61 ngày có commit (chưa tính, xem hợp đồng gốc)</span
+                >
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx">Chấm công văn phòng &amp; ca làm việc</span>
+                </div>
+                <span><span class="chip c-hold">HCNS</span></span
+                ><span class="mono nw">05/2026</span
+                ><span class="mono ext-d">5 man-day</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Audit log &amp; phân quyền</span></div>
+                <span><span class="chip c-hold">Chung</span></span
+                ><span class="mono nw">16/06/2026</span
+                ><span class="mono ext-d">3 man-day</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Kỹ năng &amp; nhóm nhân sự</span></div>
+                <span><span class="chip c-hold">HCNS</span></span
+                ><span class="mono nw">30/06 – 01/07/2026</span
+                ><span class="mono ext-d">3 man-day</span>
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx">Danh sách đen / điểm tín dụng từ chối</span>
+                </div>
+                <span><span class="chip c-hold">KHSX</span></span
+                ><span class="mono nw">01/07/2026</span
+                ><span class="mono ext-d">3 man-day</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Duyệt tài khoản đăng ký</span></div>
+                <span><span class="chip c-hold">HCNS</span></span
+                ><span class="mono nw">08/2026</span
+                ><span class="mono ext-d">1 man-day</span>
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx"
+                    >Camera và nhận diện khuôn mặt chấm công</span
+                  >
+                </div>
+                <span><span class="chip c-hold">Chung</span></span
+                ><span class="mono nw">06/2026 – 09/2026</span
+                ><span class="mono ext-d">6 man-day</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Giám sát &amp; triển khai</span></div>
+                <span><span class="chip c-hold">Hạ tầng</span></span
+                ><span class="mono nw">04/2026 – 09/2026</span
+                ><span class="mono ext-d">7 man-day</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Trang công khai</span></div>
+                <span><span class="chip c-hold">Chung</span></span
+                ><span class="mono nw">08/2026 – 10/2026</span
+                ><span class="mono ext-d">2 man-day</span>
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx"
+                    >Sửa thông tin cơ bản KHSX, kỹ năng yêu cầu</span
+                  >
+                </div>
+                <span><span class="chip c-hold">KHSX</span></span
+                ><span class="mono nw">06/2026 – 07/2026</span
+                ><span class="mono ext-d">2 man-day</span>
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx"
+                    >Mobile: nhắc cập nhật phiên bản, Shorebird</span
+                  >
+                </div>
+                <span><span class="chip c-hold">Mobile</span></span
+                ><span class="mono nw">09/2026</span
+                ><span class="mono ext-d">gồm trong ≈39</span>
+              </div>
+              <div class="it ext">
+                <div>
+                  <span class="nmx">Mobile: CI/CD, test, giám sát</span>
+                </div>
+                <span><span class="chip c-hold">Mobile</span></span
+                ><span class="mono nw">07/2026 – 09/2026</span
+                ><span class="mono ext-d">gồm trong ≈39</span>
+              </div>
+              <div class="it ext">
+                <div><span class="nmx">Mobile: tiện ích giao diện</span></div>
+                <span><span class="chip c-hold">Mobile</span></span
+                ><span class="mono nw">09/2026</span
+                ><span class="mono ext-d">gồm trong ≈39</span>
+              </div>
+            </div>
+            <p class="foot pad-x">
+              Cần GAL xác nhận từng mục thuộc hợp đồng nào, có tính phí hay
+              không.
+            </p>
+          </div>
+        </div>
+      </section>
+      <details class="card app">
+        <summary>
+          <span>Phụ lục: cách phân loại và cách tính người-ngày</span
+          ><svg width="16" height="16" aria-hidden="true">
+            <use href="#i-down" />
+          </svg>
+        </summary>
+        <div class="appbody">
+          <h3>Cách phân loại</h3>
+          <ul>
+            <li><b>Đã xong · tính phí:</b> hoàn thành, có căn cứ trên code.</li>
+            <li>
+              <b>Chờ xác nhận / đang dở:</b> đã làm chờ GAL xác nhận, làm một
+              phần, hoặc đang làm.
+            </li>
+            <li>
+              <b>Chờ GAL chốt phạm vi:</b> chưa làm, cần GAL trả lời mới tính
+              được phí.
+            </li>
+            <li><b>Hoãn giai đoạn 2:</b> báo giá riêng khi mở lại.</li>
+          </ul>
+          <h3>Cách đọc số người-ngày</h3>
+          <p>
+            Đây là phân bổ đề xuất làm cơ sở báo giá, không phải số giờ ghi
+            nhận. Cơ sở là số ngày có commit trong git, chưa tính họp, test, hỗ
+            trợ, nên GAL và đơn vị tính phí có thể điều chỉnh theo hợp đồng. Mục
+            “còn lại” là ước tính thô cho việc chưa làm. Nguồn dữ liệu: git
+            02/12/2025 – 06/10/2026, roadmap-gal.vercel.app.
+          </p>
+        </div>
+      </details>
+    </main>
+  </body>
+</html>
